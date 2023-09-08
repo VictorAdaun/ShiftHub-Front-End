@@ -78,6 +78,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        body: ["'Helvetica Neue'", "sans-serif"]
+      },
       fontSize: {
         "h-1": ["61px", "73.2px"],
         "h-2": ["49px", "61.25px"],
