@@ -78,6 +78,9 @@ export default {
   ],
   theme: {
     extend: {
+      width: {
+        "fill": "-webkit-fill-available",
+      },
       fontFamily: {
         body: ["'Helvetica Neue'", "sans-serif"]
       },
