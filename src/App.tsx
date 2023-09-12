@@ -1,4 +1,4 @@
-import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider } from 'react-router-dom';
+import { Route, createBrowserRouter, createRoutesFromElements, RouterProvider, Navigate } from 'react-router-dom';
 import Login from './pages/auth/login';
 import EmailLogin from './pages/auth/email-login';
 import ResetPassword from './pages/auth/reset-password';
@@ -13,17 +13,16 @@ const router = createBrowserRouter(
       <Route path="/login/reset-password" element={<ResetPassword />}/>
       <Route path="/signup" element={<Signup />}/>
       <Route path="/onboarding" element={<Onboarding/>}/>
+      <Route
+        path="*"
+        element={<Navigate to="/login" replace />}
+      />
     </>
   )
 )
 
 function App() {
-
-  return (
-    <>
-      <RouterProvider router={router} />
-    </>
-  );
+  return <RouterProvider router={router} />
 }
 
 export default App;

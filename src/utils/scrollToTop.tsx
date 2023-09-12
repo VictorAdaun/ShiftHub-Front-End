@@ -2,13 +2,8 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 
-type ScrollProps = {
-  children: React.ReactNode; // 👈️ type children
 
-};
-
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-export default function ScrollToTop(props: ScrollProps) {
+export default function ScrollToTop() {
   const { pathname } = useLocation();
 
   useEffect(() => {
