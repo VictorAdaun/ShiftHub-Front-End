@@ -1,38 +1,55 @@
-import LoginImage from "../../assets/LoginIllustration.svg"
-import Facebook from "../../assets/Facebook.svg"
-import Google from "../../assets/Google.svg"
-import Apple from "../../assets/Apple.svg"
-import AuthLayout from "../../layouts/auth"
+import LoginImage from "../../assets/svgs/auth/LoginIllustration.svg";
+import Facebook from "../../assets/svgs/auth/Facebook.svg";
+import Google from "../../assets/svgs/auth/Google.svg";
+import Apple from "../../assets/svgs/auth/Apple.svg";
+import AuthLayout from "../../layouts/auth";
+import { useNavigate } from "react-router-dom";
+import PrimaryButton from "../../components/button/primary-button";
+import SecondaryButton from "../../components/button/secondary-button";
 
 function Login() {
+  const navigate = useNavigate()
+
+  const socialMediaLogin = () => {
+    console.log("disabled")
+  }
+
   return (
     <AuthLayout>
-        <div className="login w-96 h-auto mx-auto text-center">
-            <div className="login-image w-fit mx-auto">
-                <img src={LoginImage} alt="Login" />
-            </div>
-            <p className="my-4">Let's log you in.</p>
-            <button className="w-full py-2 border border-solid border-[#D0D5DD] rounded-md font-normal text-sm text-[#101323] flex items-center justify-center gap-5 mb-4">
-                <img src={Facebook} alt="facebook"/>
-                Login with Facebook
-            </button>
-            <button className="w-full py-2 border border-solid border-[#D0D5DD] rounded-md font-normal text-sm text-[#101323] flex items-center justify-center gap-5 mb-4">
-                <img src={Google} alt="google"/>
-                Login with Google
-            </button>
-            <button className="w-full py-2 border border-solid border-[#D0D5DD] rounded-md text-sm text-[#101323] flex items-center justify-center gap-5 mb-4">
-                <img src={Apple} alt="apple"/>
-                Login with Apple
-            </button>
-            <div className="hr w-auto flex items-center gap-2 mb-2">
-                <hr className="w-full" />
-                <em className="text-sm">OR</em>
-                <hr className="w-full"/>
-            </div>
-            <button className="w-full py-2 border-none text-white bg-lydia rounded-md text-sm">Sign in with Password</button>
+      <div className="login w-full max-w-[425px] h-auto mx-auto text-center">
+        <div className="login-image w-fit mx-auto">
+          <img src={LoginImage} alt="Login" />
         </div>
+        <p className="my-4">Let's log you in.</p>
+        <SecondaryButton onClick={socialMediaLogin} className="mb-3 !py-[11px]">
+          <div className="flex items-center justify-center gap-5">
+            <img src={Facebook} alt="facebook" />
+            <span>Login with Facebook</span>
+          </div>
+        </SecondaryButton>
+        <SecondaryButton onClick={socialMediaLogin} className="mb-3 !py-[11px]">
+          <div className="flex items-center justify-center gap-5">
+            <img src={Google} alt="google" />
+            <span>Login with Google</span>
+          </div>
+        </SecondaryButton>
+        <SecondaryButton onClick={socialMediaLogin} className="mb-3 !py-[11px]">
+          <div className="flex items-center justify-center gap-5">
+            <img src={Apple} alt="apple" />
+            <span>Login with Apple</span>
+          </div>
+        </SecondaryButton>
+        <div className="hr w-auto flex items-center gap-2 mb-6">
+          <hr className="w-full" />
+          <span className="text-body-large text-grayscale-60 font-normal">OR</span>
+          <hr className="w-full" />
+        </div>
+        <PrimaryButton onClick={()=>navigate("/login/email")}>
+          Sign in with Email    
+        </PrimaryButton>
+      </div>
     </AuthLayout>
-  )
+  );
 }
 
-export default Login
+export default Login;
