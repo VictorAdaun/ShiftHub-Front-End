@@ -3,14 +3,42 @@ import PrimaryButton from "../../components/button/primary-button"
 import SecondaryButton from "../../components/button/secondary-button"
 import AuthLayout from "../../layouts/auth"
 import { useNavigate } from "react-router-dom"
+import { useForm } from "react-hook-form"
+import * as yup from "yup"
+import { yupResolver } from "@hookform/resolvers/yup"
+import constants from "../../utils/constants"
+import FormError from "../../components/form/form-error"
+
+interface IFormInput {
+    email: string,
+    password: string
+}
+
+const schema = yup
+    .object({
+        email: yup.string().required(constants.FIELD_REQUIRED_MESSAGE).email("This field should contain a valid email"),
+        password: yup.string()
+            .required(constants.FIELD_REQUIRED_MESSAGE),
+    })
+    .required();
 
 function Login() {
 
     const navigate = useNavigate()
 
+    const { 
+        register, 
+        handleSubmit, 
+        formState: { errors } 
+    } = useForm({ resolver: yupResolver(schema) });
+
+    const handleSignin = (data: IFormInput) => {
+        console.log(data)
+    }
+
     return (
         <AuthLayout>
-            <div className="login w-96 h-auto mx-auto text-center">
+            <div className="login w-[80%] md:w-full max-w-[425px] h-auto mx-auto text-center">
                 <h1 className="my-4 text-2xl">Welcome Back!</h1>
                 <SecondaryButton onClick={()=>console.log("")} className="mb-3 !py-[11px]">
                     <div className="flex items-center justify-center gap-5">
@@ -24,15 +52,27 @@ function Login() {
                     <hr className="w-1/4" />
                 </div>
 
-                <form className="w-full">
+                <form className="w-full" onSubmit={handleSubmit(handleSignin)}>
                     <div className="field flex flex-col items-start gap-2 mb-6">
                         <label htmlFor="email" className="text-sm">Email Address</label>
-                        <input type="email" name="email" id="email" placeholder="Enter your email" className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
+                        <input 
+                        type="email" 
+                        name="email" 
+                        id="email" 
+                        {...register("email")}
+                        placeholder="Enter your email" className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
+                        {errors.email && <FormError error={errors.email.message}></FormError>}
                     </div>
 
                     <div className="field flex flex-col items-start gap-2 mb-6">
                         <label htmlFor="password" className="text-sm">Password</label>
-                        <input type="password" name="password" id="password" placeholder="Enter your password" className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
+                        <input 
+                        type="password" 
+                        name="password" 
+                        id="password" 
+                        {...register("password")}
+                        placeholder="Enter your password" className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
+                        {errors.password && <FormError error={errors.password.message}></FormError>}
                         <p className="text-lydia ml-auto text-sm">Forgot password?</p>
                     </div>
 
@@ -41,10 +81,8 @@ function Login() {
                         <p className="text-sm">Stay logged in</p>
                     </div>
 
-                    <button className="w-full py-2 border-none text-white bg-lydia rounded-md text-sm">Sign in</button>
-
                     <PrimaryButton onClick={() => navigate("/login/email")}>
-                        Sign in with Email
+                        Sign in
                     </PrimaryButton>
 
                     <p className="text-sm mt-4 text-left text-[#667085]">Don’t have an account? <em className="text-lydia not-italic">Sign up</em></p>

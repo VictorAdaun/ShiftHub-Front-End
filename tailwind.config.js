@@ -81,6 +81,9 @@ export default {
       width: {
         "fill": "-webkit-fill-available",
       },
+      backgroundImage: {
+        "welcome-image": "url('./src/assets/illustrations/welcome-illustration.svg')",
+      },
       fontFamily: {
         body: ["'Helvetica Neue'", "sans-serif"]
       },
