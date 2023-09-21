@@ -13,12 +13,20 @@ import Task from './pages/dashboard/task';
 import Report from './pages/dashboard/report';
 import Settings from './pages/dashboard/settings';
 
+import ResetPassword from './pages/auth/reset-password';
+import Signup from './pages/auth/signup';
+import Onboarding from './pages/auth/onboarding';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
+      {/* Auth */}
       <Route path="/login" element={<Login />}/>
-      <Route path="/login/email" element={<EmailLogin />} />
+      <Route path="/login/email" element={<EmailLogin />}/>
+      <Route path="/login/reset-password" element={<ResetPassword />}/>
+      <Route path="/signup" element={<Signup />}/>
+      <Route path="/onboarding" element={<Onboarding />} />
+      {/* Dashboard */}
       <Route path='/' element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
         <Route path='/schedule' element={<Outlet />}>

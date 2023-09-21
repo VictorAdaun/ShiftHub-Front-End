@@ -16,7 +16,7 @@ function Login() {
 
   return (
     <AuthLayout>
-      <div className="login w-full max-w-[425px] h-auto mx-auto text-center">
+      <div className="login w-[80%] md:w-full max-w-[425px] h-auto mx-auto text-center">
         <div className="login-image w-fit mx-auto">
           <img src={LoginImage} alt="Login" />
         </div>
