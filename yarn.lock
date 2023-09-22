@@ -452,6 +452,18 @@
   "resolved" "https://registry.npmjs.org/@remix-run/router/-/router-1.8.0.tgz"
   "version" "1.8.0"
 
+"@tanstack/react-table@^8.10.1":
+  "integrity" "sha512-pD58vH5ahZv1qzAK9Xl87A5dydBnKiDGdyEsd5VK2bG2wGRbfbpBfH915KdUv+8XqabDQgUo8nU8qHBEQv1qvg=="
+  "resolved" "https://registry.npmjs.org/@tanstack/react-table/-/react-table-8.10.1.tgz"
+  "version" "8.10.1"
+  dependencies:
+    "@tanstack/table-core" "8.10.1"
+
+"@tanstack/table-core@8.10.1":
+  "integrity" "sha512-dvO7wz+WjnT+7KI6ZZ+GAe9tljIFResDaV/TfOhfpeTB0ud9pILsavuM22HAXG2NsVaIG2Zax2OaVIsNt0z7Og=="
+  "resolved" "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.10.1.tgz"
+  "version" "8.10.1"
+
 "@types/json-schema@^7.0.12":
   "integrity" "sha512-Hr5Jfhc9eYOQNPYO5WLDq/n4jqijdHNlDXjuAQkkt+mWdQR+XJToOHrsD4cPaMXpn6KO7y2+wM8AZEs8VpBLVA=="
   "resolved" "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.12.tgz"
@@ -1694,7 +1706,7 @@
   "resolved" "https://registry.npmjs.org/queue-microtask/-/queue-microtask-1.2.3.tgz"
   "version" "1.2.3"
 
-"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16.6.0", "react-dom@>=16.8":
+"react-dom@^16.8.0 || ^17.0.0 || ^18.0.0", "react-dom@^18.2.0", "react-dom@>=16", "react-dom@>=16.6.0", "react-dom@>=16.8":
   "integrity" "sha512-6IMTriUmvsjHUjNtEDudZfuDQUoWXVxKHhlEGSk81n4YFS+r/Kl99wXiwlVXtPBtJenozv2P+hxDsw9eA7Xo6g=="
   "resolved" "https://registry.npmjs.org/react-dom/-/react-dom-18.2.0.tgz"
   "version" "18.2.0"
@@ -1757,7 +1769,7 @@
     "loose-envify" "^1.4.0"
     "prop-types" "^15.6.2"
 
-"react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
+"react@^16.8.0 || ^17 || ^18", "react@^16.8.0 || ^17.0.0 || ^18.0.0", "react@^18.2.0", "react@>=16", "react@>=16.6.0", "react@>=16.8", "react@>=16.8.0":
   "integrity" "sha512-/3IjMdb2L9QbBdWiW5e3P2/npwMBaU9mHCSCUzNln0ZCYbcfTsGbTJrU/kGemdH2IWmB2ioZ+zkxtmq6g09fGQ=="
   "resolved" "https://registry.npmjs.org/react/-/react-18.2.0.tgz"
   "version" "18.2.0"

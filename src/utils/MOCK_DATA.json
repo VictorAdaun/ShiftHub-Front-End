@@ -1,0 +1,284 @@
+[
+    {
+        "id": 1,
+        "shift": "Morning",
+        "first_name": "Tamiko",
+        "last_name": "Pothergill",
+        "availability": {
+            "monday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "tuesday": {
+                "availability": "avail for tuesday morning",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "wednesday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "thursday": {
+                "availability": "avail for thursday morning",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "friday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "saturday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            }
+        },
+        "start_time": "7:30 PM",
+        "end_time": "9:38 PM"
+    },
+    {
+        "id": 2,
+        "shift": "Afternoon",
+        "first_name": "Rikki",
+        "last_name": "Rioch",
+        "availability": {
+            "monday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "tuesday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "wednesday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "thursday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "friday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "saturday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            }
+        },
+        "start_time": "4:55 AM",
+        "end_time": "12:21 PM"
+    },
+    {
+        "id": 3,
+        "shift": "Evening",
+        "first_name": "Cass",
+        "last_name": "Bazelle",
+        "availability": {
+            "monday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "tuesday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "wednesday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "thursday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "friday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            },
+            "saturday": {
+                "availability": "avail",
+                "individuals": [
+                    {
+                        "name": "ben"
+                    },
+                    {
+                        "name": "sam"
+                    },
+                    {
+                        "name": "vick"
+                    }
+                ]
+            }
+        },
+        "start_time": "8:18 PM",
+        "end_time": "12:36 PM"
+    }
+]
