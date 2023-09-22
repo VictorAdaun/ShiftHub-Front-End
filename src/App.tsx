@@ -26,16 +26,20 @@ const router = createBrowserRouter(
       <Route path="/login/reset-password" element={<ResetPassword />}/>
       <Route path="/signup" element={<Signup />}/>
       <Route path="/onboarding" element={<Onboarding />} />
+      
       {/* Dashboard */}
       <Route path='/' element={<DashboardLayout />}>
         <Route index element={<Dashboard />} />
         <Route path='/schedule' element={<Outlet />}>
+          <Route index element={<Navigate to="schedules" replace />} />
           <Route path='schedules' element={<Schedules />} />
           <Route path='shift-swaps' element={<ShiftSwaps />} />
           <Route path='time-off' element={<TimeOff />} />
           <Route path='availability' element={<Availability/>}/>
         </Route>
         <Route path='/team' element={<Outlet />}>
+        <Route path='employees' element={<Employees />} />
+          <Route index element={<Navigate to="employees" replace />} />
           <Route path='employees' element={<Employees />} />
           <Route path='engagement' element={<Engagement />} />
         </Route>
