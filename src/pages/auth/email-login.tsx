@@ -2,7 +2,7 @@ import Google from "../../assets/svgs/auth/Google.svg"
 import PrimaryButton from "../../components/button/primary-button"
 import SecondaryButton from "../../components/button/secondary-button"
 import AuthLayout from "../../layouts/auth"
-import { useNavigate } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useForm } from "react-hook-form"
 import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
@@ -85,7 +85,7 @@ function Login() {
                         Sign in
                     </PrimaryButton>
 
-                    <p className="text-sm mt-4 text-left text-[#667085]">Don’t have an account? <em className="text-lydia not-italic">Sign up</em></p>
+                    <p className="text-sm mt-4 text-left text-[#667085]">Don’t have an account? <Link to="/signup"><em className="text-lydia not-italic">Sign up</em></Link></p>
                 </form>
             </div>
         </AuthLayout>

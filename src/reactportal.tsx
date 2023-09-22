@@ -29,7 +29,7 @@ export default function ReactPortal (props: portalProps, { wrapperId = "react-po
 
 
     console.log(element)
-  }, [])
+  }, [wrapperId])
   
 
   // wrapperElement state will be null on the very first render.
