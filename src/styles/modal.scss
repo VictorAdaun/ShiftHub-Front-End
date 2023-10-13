@@ -1,0 +1,18 @@
+/* width */
+.modal{
+    &::-webkit-scrollbar {
+        width: 5px;
+    }
+      
+    /* Track */
+    &::-webkit-scrollbar-track {
+        background: transparent;
+    }
+      
+    /* Handle */
+    &::-webkit-scrollbar-thumb {
+        background: rgb(208 213 221);
+        border-radius: 5px;
+    }
+}
+  

@@ -7,7 +7,7 @@ type modalProps = {
     handleClose: () => void
 }
 
-function Modal(props: modalProps) {
+function ScrollableModal(props: modalProps) {
 
     useEffect(() => {
         const closeOnEscapeKey = (e: KeyboardEvent) => e.key === "Escape" ? props.handleClose() : null;
@@ -26,10 +26,10 @@ function Modal(props: modalProps) {
         <div onClick={props.handleClose} className="bg-[#101323] bg-opacity-50 backdrop-blur-5 h-screen w-full fixed left-0 bottom-0 z-[9]">
         </div>
 
-        <div className="modal py-4 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10] rounded-lg flex justify-center items-center">
+        <div className="modal bg-white h-[80%] py-4 w-[40%] fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10] rounded-lg flex justify-center items-center overflow-y-scroll">
             {props.children}
         </div>
     </div>
   );
 }
-export default Modal;
+export default ScrollableModal;

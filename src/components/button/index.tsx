@@ -1,8 +1,8 @@
 import { ButtonProps } from "./interface";
 
-function Button({ onClick, className, children, type }: ButtonProps) {
+function Button({ onClick, className, children, type, disabled }: ButtonProps) {
   return (
-    <button onClick={onClick} className={className} type={type}>
+    <button onClick={onClick} className={className} type={type} disabled={disabled}>
       {children}
     </button>
   );

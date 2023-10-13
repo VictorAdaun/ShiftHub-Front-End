@@ -11,7 +11,7 @@ function DashboardLayout() {
         <main className='flex'>
             <DashboardSidebar/>
             <section className='w-full'>
-                <div className='flex justify-between border-b-2 border-b-grayscale-30 px-8 py-[19.5px]'>
+                <div className='flex justify-between border-b border-b-grayscale-30 px-8 py-[19.5px]'>
                     <div className='flex gap-4 items-center'>
                         <img src={SearchIcon} alt='Search icon'/>
                         <button className='text-grayscale-60 text-body-large'>

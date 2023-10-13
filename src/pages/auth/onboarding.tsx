@@ -3,7 +3,7 @@ import AuthLayout from "../../layouts/auth";
 import Trash from "../../assets/trash.svg";
 import Plus from "../../assets/Plus.svg";
 // import ReactPortal from '../../Reactportal'
-import Modal from "../../components/modal";
+import Modal from "../../components/scrollable-modal";
 import PrimaryButton from "../../components/button/primary-button";
 import Close from "../../assets/svgs/close-circle.svg";
 import Avatar from "../../assets/imgs/sample-avatar.png";
@@ -152,9 +152,8 @@ function Onboarding() {
       <div className="onboarding w-[80%] md:w-full max-w-[425px] h-auto mx-auto my-12 text-center">
         <div className="timeline flex justify-between items-center mx-auto mb-4 w-3/4 mt-10">
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${
-              onboardStep > 1 ? "bg-lydia" : null
-            }`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${onboardStep > 1 ? "bg-lydia" : null
+              }`}
           >
             {onboardStep > 1 ? (
               <Icon name="check" />
@@ -164,9 +163,8 @@ function Onboarding() {
           </div>
           <hr className="w-1/3 border-lydia border-t-2 border-dotted"></hr>
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${
-              onboardStep === 3 ? "bg-lydia" : null
-            }`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${onboardStep === 3 ? "bg-lydia" : null
+              }`}
           >
             {onboardStep === 3 ? (
               <Icon name="check" />
@@ -175,14 +173,12 @@ function Onboarding() {
             )}
           </div>
           <hr
-            className={`w-1/3 border-[#D0D5DD] border-t-2 border-dotted ${
-              onboardStep === 3 ? "border-lydia" : null
-            }`}
+            className={`w-1/3 border-[#D0D5DD] border-t-2 border-dotted ${onboardStep === 3 ? "border-lydia" : null
+              }`}
           ></hr>
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${
-              onboardStep >= 4 ? "bg-lydia" : null
-            }`}
+            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${onboardStep >= 4 ? "bg-lydia" : null
+              }`}
           >
             {onboardStep >= 4 ? (
               <Icon name="check" />
