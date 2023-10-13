@@ -1570,6 +1570,18 @@
     "@svgr/plugin-jsx" "8.1.0"
     "@svgr/plugin-svgo" "8.1.0"
 
+"@tanstack/react-table@^8.10.1":
+  version "8.10.1"
+  resolved "https://registry.npmjs.org/@tanstack/react-table/-/react-table-8.10.1.tgz"
+  integrity sha512-pD58vH5ahZv1qzAK9Xl87A5dydBnKiDGdyEsd5VK2bG2wGRbfbpBfH915KdUv+8XqabDQgUo8nU8qHBEQv1qvg==
+  dependencies:
+    "@tanstack/table-core" "8.10.1"
+
+"@tanstack/table-core@8.10.1":
+  version "8.10.1"
+  resolved "https://registry.npmjs.org/@tanstack/table-core/-/table-core-8.10.1.tgz"
+  integrity sha512-dvO7wz+WjnT+7KI6ZZ+GAe9tljIFResDaV/TfOhfpeTB0ud9pILsavuM22HAXG2NsVaIG2Zax2OaVIsNt0z7Og==
+
 "@trysound/sax@0.2.0":
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/@trysound/sax/-/sax-0.2.0.tgz#cccaab758af56761eb7bf37af6f03f326dd798ad"
