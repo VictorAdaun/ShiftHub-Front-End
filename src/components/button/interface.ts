@@ -7,4 +7,5 @@ export interface ButtonProps{
     inverted?: boolean,
     sm?: boolean,
     type?: "button" | "reset" | "submit",
+    disabled?: boolean,
 }

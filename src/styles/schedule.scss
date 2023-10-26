@@ -1,0 +1,350 @@
+/* Schedule table styling (CSS) */
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    font: menu
+        /* For now (till font issue gets fixed) */
+}
+
+th {
+    color: #000;
+    font-weight: normal !important;
+}
+
+th,
+td {
+    padding: 10px;
+    border: 1px solid #EAECF0;
+    border-bottom: none;
+    border-right: none;
+}
+
+th:last-child {
+    border-right: 1px solid #EAECF0;
+}
+
+td {
+    border-bottom: none;
+    border-right: none;
+}
+
+td:not(:last-child) {
+    border-bottom: none;
+    border-right: none;
+}
+
+tr:last-child td {
+    border-bottom: 1px solid #EAECF0;
+}
+
+tr td:last-child {
+    border-right: 1px solid #EAECF0;
+}
+
+/* required css to make rounded table (below) */
+tr:first-child th:first-child {
+    border-top-left-radius: 10px;
+}
+
+tr:first-child th:last-child {
+    border-top-right-radius: 10px;
+}
+
+tr:last-child td:first-child {
+    border-bottom-left-radius: 10px;
+}
+
+tr:last-child td:last-child {
+    border-bottom-right-radius: 10px;
+}
+
+td {
+    height: 120px;
+}
+
+/* Styling table cells */
+
+td div {
+    display: flex;
+    flex-direction: column;
+    height: inherit;
+    justify-content: space-between;
+}
+
+td div em,
+th div em,
+th:first-child {
+    font-style: normal;
+    color: #667085;
+}
+
+td div p,
+th div p {
+    font-weight: 500;
+}
+
+th div {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+// Basic table styles CSS End here
+
+.cell {
+    .status {
+        height: 35px;
+        width: 80px;
+        border-radius: 20px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-around;
+        padding: 0px 5px;
+    }
+
+    .container {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        height: fit-content;
+        gap: 5px;
+    }
+
+    .available {
+        background-color: #FFF5E6;
+        color: #EDA12F;
+    }
+
+    .booked {
+        background-color: #F0FAF0;
+        color: #2D8A39;
+    }
+
+    .avatars {
+        display: flex;
+        flex-direction: row;
+        justify-content: unset;
+        height: fit-content;
+    }
+
+    .avatars img:not(:first-child) {
+        height: 30px;
+        width: 30px;
+        margin-left: -10px;
+    }
+
+}
+
+.schedule_day {
+    width: 90%;
+    height: 500px;
+    border: 1px solid #EAECF0;
+    border-radius: 10px;
+    font-weight: 400;
+    font-size: 14px;
+    overflow: hidden;
+    margin: 20px auto;
+    border-left: none;
+
+    .time {
+        width: 100%;
+        padding: 16px 18px;
+        display: grid;
+        justify-content: flex-start;
+        align-content: center;
+        border-left: 1px solid #EAECF0;
+    }
+}
+
+
+/* time 8am - 8pm */
+/* columns between intervals length = 13 */
+/* GridPerDay 13 hours * 60mins/ 15minutes = 52 interval for grid */
+
+
+.intervals {
+    display: grid;
+    grid-template-columns: repeat(13, 1fr);
+
+    span {
+        border: 1px solid #EAECF0;
+        padding: 10px;
+        // padding: 16px 18px
+        text-align: center;
+        border-right: none;
+    }
+}
+
+.calendar {
+    display: grid;
+    grid-template-columns: repeat(52, 1fr);
+    grid-template-rows: repeat(6, 60px);
+    height: 420px;
+    grid-gap: 10px;
+    background-size: calc(100% / 13) 420px;
+    background-position-y: top;
+    background-repeat: repeat no-repeat;
+    background-image: linear-gradient(to right, #EAECF0 1px, transparent 1px);
+
+    .session {
+        border-radius: 8px;
+        border: 1px solid #F9FAFB;
+        box-shadow: 0px 12px 16px -4px rgba(16, 24, 40, 0.04), 0px 4px 6px -2px rgba(16, 24, 40, 0.03);
+        background-color: #fff;
+        color: #000;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        gap: 10px;
+        padding: 0px 10px;
+
+        .lhs-status {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 5px;
+        }
+
+        em {
+            font-style: normal;
+            font-size: 12px;
+        }
+
+        .status {
+            height: 35px;
+            width: 80px;
+            border-radius: 20px;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-around;
+            padding: 0px 5px;
+        }
+
+        .available {
+            background-color: #FFF5E6;
+            color: #EDA12F;
+        }
+
+        .booked {
+            background-color: #F0FAF0;
+            color: #2D8A39;
+        }
+
+        .avatars {
+            display: flex;
+            flex-direction: row;
+            justify-content: unset;
+            height: fit-content;
+        }
+
+        .avatars img:not(:first-child) {
+            height: 30px;
+            width: 30px;
+            margin-left: -10px;
+        }
+    }
+}
+
+// Checkbox style
+.button-wrap {
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 5px;
+}
+
+.button-label {
+    display: inline-block;
+    padding: 6px 12px;
+    cursor: pointer;
+    color: #000;
+    border-radius: 8px;
+    background: #fff;
+    user-select: none;
+    border: 1px solid #D0D5DD;
+
+    h1 {
+        font-size: 14px;
+    }
+
+    &:hover {
+        background: darken(#fff, 10%);
+        color: darken(#000, 10%);
+        box-shadow: 1px 1px 8px 1px rgba(151, 71, 255, 0.50);
+    }
+
+    &:active {
+        box-shadow: 1px 1px 8px 1px rgba(151, 71, 255, 0.50);
+    }
+
+}
+
+.radio-label:checked+.button-label {
+    background: #fff;
+    color: #000;
+    border: 1px solid rgba(151, 71, 255, 0.50);
+    box-shadow: 1px 1px 8px 1px rgba(151, 71, 255, 0.50);
+
+    &:hover {
+        background: darken(#fff, 5%);
+        color: darken(#000, 5%);
+    }
+}
+
+// end
+.activeSlot {
+    border: 1px solid rgba(151, 71, 255, 0.50);
+    box-shadow: 1px 1px 8px 1px rgba(151, 71, 255, 0.50);
+}
+
+// Custom checkbox (CSS)
+.checkbox {
+    display: block;
+}
+
+.checkbox input[type=checkbox] {
+    display: none;
+}
+
+.checkbox input[type=checkbox]:checked + label {
+    background-color: #7B68EE;
+}
+
+.checkbox {
+    & input[type=checkbox]:checked + label:after {
+        left: 16px
+    }
+}
+
+.checkbox label {
+    transition: all 200ms ease-in-out;
+    display: inline-block;
+    position: relative;
+    height: 22px;
+    width: 34px;
+    border-radius: 40px;
+    cursor: pointer;
+    background-color: #ddd;
+    color: transparent;
+}
+
+.checkbox label:after {
+    transition: all 200ms ease-in-out;
+    content: " ";
+    position: absolute;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: white;
+    top: 3px;
+    left: 3px;
+    right: auto;
+    box-shadow: 1px 1px 1px gray;
+}

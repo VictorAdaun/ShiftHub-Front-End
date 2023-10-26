@@ -1,0 +1,369 @@
+[
+    {
+        "id": 1,
+        "shift": "Morning",
+        "first_name": "Tamiko",
+        "last_name": "Pothergill",
+        "availability": {
+            "monday": {
+                "availability": false,
+                "individuals": [
+                    {
+                        "name": "ben on monday morning",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "9:00 AM",
+                "duration": "4hours"
+            },
+            "tuesday": {
+                "availability": false,
+                "individuals": [
+                    {
+                        "name": "ben on tuesday",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "9:30 AM",
+                "duration": "4hours"
+            },
+            "wednesday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben on wednesday",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "8:30 AM",
+                "duration": "4hours"
+            },
+            "thursday": {
+                "availability": false,
+                "individuals": [
+                    {
+                        "name": "ben on thursday",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "10:30 AM",
+                "duration": "4hours"
+            },
+            "friday": {
+                "availability": true,
+                "individuals": [
+                    { 
+                        "name": "ben on friday",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "11:30 AM",
+                "duration": "4hours"
+            },
+            "saturday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben on saturday",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "8:30 AM",
+                "duration": "4hours"
+            }
+        }
+    },
+    {
+        "id": 2,
+        "shift": "Afternoon",
+        "first_name": "Rikki",
+        "last_name": "Rioch",
+        "availability": {
+            "monday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "12:30 PM",
+                "duration": "4hours"
+            },
+            "tuesday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "13:30 PM",
+                "duration": "4hours"
+            },
+            "wednesday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "15:30 PM",
+                "duration": "4hours"
+            },
+            "thursday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "12:30 PM",
+                "duration": "4hours"
+            },
+            "friday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "12:30 PM",
+                "duration": "4hours"
+            },
+            "saturday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "13:30 PM",
+                "duration": "3 hours"
+            }
+        }
+    },
+    {
+        "id": 3,
+        "shift": "Evening",
+        "first_name": "Cass",
+        "last_name": "Bazelle",
+        "availability": {
+            "monday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "16:00 PM",
+                "duration": "4hours"
+            },
+            "tuesday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "16:30 PM",
+                "duration": "2 hours"
+            },
+            "wednesday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "17:30 PM",
+                "duration": "1 hours"
+            },
+            "thursday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "16:30 PM",
+                "duration": "2 hours"
+            },
+            "friday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "15:30 PM",
+                "duration": "3 hours"
+            },
+            "saturday": {
+                "availability": true,
+                "individuals": [
+                    {
+                        "name": "ben on saturday evening",
+                        "email": "ben@63.com"
+                    },
+                    {
+                        "name": "sam",
+                        "email": "sam@gmail.com"
+                    },
+                    {
+                        "name": "vick",
+                        "email": "vick@yahoo.com"
+                    }
+                ],
+                "start_time": "16:30 PM",
+                "duration": "3 hours"
+            }
+        }
+    }
+]

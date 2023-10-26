@@ -132,7 +132,7 @@ function DashboardSidebar() {
   };
 
   return (
-    <aside className="px-4 w-[272px]">
+    <aside className="px-4 w-[272px] border border-solid border-r-grayscale-30">
       <div className="py-6">
         <img src={ShiftHubLogo} alt="Shifthub logo" />
       </div>
