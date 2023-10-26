@@ -38,7 +38,6 @@ const router = createBrowserRouter(
           <Route path='availability' element={<Availability/>}/>
         </Route>
         <Route path='/team' element={<Outlet />}>
-        <Route path='employees' element={<Employees />} />
           <Route index element={<Navigate to="employees" replace />} />
           <Route path='employees' element={<Employees />} />
           <Route path='engagement' element={<Engagement />} />
