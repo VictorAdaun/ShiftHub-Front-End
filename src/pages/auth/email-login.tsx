@@ -8,6 +8,8 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import constants from "../../utils/constants"
 import FormError from "../../components/form/form-error"
+import { useQuery, UseQueryResult } from "react-query"
+import axiosInstance from "../../utils/axios"
 
 interface IFormInput {
     email: string,
@@ -35,6 +37,14 @@ function Login() {
     const handleSignin = (data: IFormInput) => {
         console.log(data)
     }
+
+    // const loginQuery : UseQueryResult<IFormInput, unknown> = useQuery("login", 
+    // () => {
+    //     axiosInstance.get("https://jsonplaceholder.typicode.com/todos/1")
+    //     .then((res) => 
+    //         console.log(res)
+    //     )
+    // })
 
     return (
         <AuthLayout>

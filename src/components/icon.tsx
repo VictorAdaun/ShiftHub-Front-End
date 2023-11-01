@@ -1,6 +1,7 @@
 import React from "react";
 import Close from "../assets/svgs/close-circle.svg";
 import Check from "../assets/svgs/check.svg";
+import CheckGrey from "../assets/svgs/check-grey.svg"
 import Booked from "../assets/svgs/booked_status.svg";
 import Available from "../assets/svgs/available_status.svg";
 import Right from "../assets/svgs/arrow-right.svg";
@@ -34,6 +35,17 @@ import EllipsisLydia from "../assets/svgs/dot_menu_lydia.svg"
 import Sort from "../assets/svgs/bars-arrow-down.svg"
 import TrashRed from "../assets/svgs/trash-red.svg"
 import RefreshGrey from  "../assets/svgs/refresh-grey.svg"
+import RedTimer from "../assets/svgs/timer.svg"
+import PlusNaked from "../assets/svgs/plus-naked.svg"
+import Streamline from "../assets/svgs/streamline.svg"
+import Morale from "../assets/svgs/morale.svg"
+import ErrorReduction from "../assets/svgs/error_reduction.svg"
+import Compliance from  "../assets/svgs/compliance.svg"
+import DataDriven from "../assets/svgs/dataDriven.svg"
+import TimeSaving from "../assets/svgs/timeSavings.svg"
+import Star from "../assets/svgs/star.svg"
+import ArrowLeftWhite from "../assets/svgs/left.svg"
+import ArrowRightWhite from "../assets/svgs/right.svg"
 
 
 type iProps = {
@@ -55,6 +67,7 @@ const Icon = (props: iProps) => {
     evening: Moon,
     forbidden: Forbidden,
     add: Plus,
+    addNaked: PlusNaked,
     profile: Profile,
     down: Arrowdown,
     rightLight: RightLight,
@@ -77,7 +90,18 @@ const Icon = (props: iProps) => {
     ellipsisLydia: EllipsisLydia,
     sort: Sort,
     refreshGrey: RefreshGrey,
-    trashRed: TrashRed
+    trashRed: TrashRed,
+    redTimer: RedTimer,
+    checkGrey: CheckGrey,
+    streamline: Streamline,
+    morale: Morale,
+    errorReduction: ErrorReduction,
+    compliance: Compliance,
+    dataDriven: DataDriven,
+    timeSaving: TimeSaving,
+    star: Star,
+    arrowLeftWhite: ArrowLeftWhite,
+    arrowRightWhite: ArrowRightWhite
   };
 
   const DynamicIcon = allIcons[props.name];

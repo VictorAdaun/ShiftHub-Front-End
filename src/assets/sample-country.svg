@@ -1,0 +1,22 @@
+<svg width="36" height="24" viewBox="0 0 36 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Mask group">
+<mask id="mask0_1177_15454" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="36" height="24">
+<rect id="Rectangle 12" width="36" height="24" fill="#C4C4C4"/>
+</mask>
+<g mask="url(#mask0_1177_15454)">
+<g id="Group 25776">
+<path id="Vector" d="M36.1428 0H-0.42865V24H36.1428V0Z" fill="#012169"/>
+<path id="Vector_2" d="M14.7071 8.86429V7.73571L2.81421 0H-0.42865V2.42857L9.46421 8.86429H14.7071Z" fill="white"/>
+<path id="Vector_3" d="M14.7071 15.1357H9.67855L-0.428589 21.7V24H3.02855L14.7071 16.3929V15.1357Z" fill="white"/>
+<path id="Vector_4" d="M32.9715 0L20.9929 7.77857V8.86429H26.3215L36.1429 2.47143V0H32.9715Z" fill="white"/>
+<path id="Vector_5" d="M20.9929 15.1357V16.35L32.7715 24H36.1429V21.6572L26.1215 15.1357H20.9929Z" fill="white"/>
+<path id="Vector_6" d="M36.1428 8.86429H20.9928V0H14.7071V8.86429H-0.42865V15.1357H14.7071V24H20.9928V15.1357H36.1428V8.86429Z" fill="white"/>
+<path id="Vector_7" d="M36.1428 10.1H19.7499V0H15.9642V10.1H-0.42865V13.8857H15.9642V24H19.7499V13.8857H36.1428V10.1Z" fill="#C8102E"/>
+<path id="Vector_8" d="M13.4499 8.86429L-0.185793 0H-0.42865V1.37143L11.0928 8.86429H13.4499Z" fill="#C8102E"/>
+<path id="Vector_9" d="M14.7071 15.1357H12.3643L-0.428589 23.4572V24H1.0857L14.7071 15.1357Z" fill="#C8102E"/>
+<path id="Vector_10" d="M22.0358 15.1357L35.6715 24H36.1429V22.7715L24.3929 15.1357H22.0358Z" fill="#C8102E"/>
+<path id="Vector_11" d="M34.6144 0L20.9929 8.85V8.86429H23.3358L36.1429 0.542857V0H34.6144Z" fill="#C8102E"/>
+</g>
+</g>
+</g>
+</svg>
