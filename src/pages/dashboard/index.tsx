@@ -1,9 +1,13 @@
+import { ReactNode, useEffect, useState } from "react";
 import { classNames } from "../../utils/functions";
 import ArrowUp from "../../assets/svgs/dashboard/summary-card/arrow-trending-up.svg"
 import ArrowDown from "../../assets/svgs/dashboard/summary-card/arrow-trending-down.svg"
 import FilterIcon from "../../assets/svgs/dashboard/filter.svg"
 import SearchIcon from "../../assets/svgs/dashboard/search-icon.svg"
-import { ReactNode } from "react";
+import CustomSelect from "../../components/custom-select";
+import bb, { bar, donut } from "billboard.js";
+import 'billboard.js/dist/billboard.css'
+
 
 
 interface SummaryCardProps {
@@ -37,7 +41,36 @@ const mockTeam = [
         name: "Food Preparation and Cooking",
         department: "Back of House",
         priority: "Very high",
-        status: "",
+        status: "in-progress",
+        deadline: "Aug 04 2023",
+        assignedTeam: [
+            {
+                name: "Stanley",
+                imgLink: "https://res.cloudinary.com/ecx/image/upload/v1640365918/Avant-Garde/Team/18_1_8_ytyr8l.png"
+            },
+            {
+                name: "Stanley",
+                imgLink: "https://res.cloudinary.com/ecx/image/upload/v1640365918/Avant-Garde/Team/18_1_8_ytyr8l.png"
+            },
+            {
+                name: "Stanley",
+                imgLink: "https://res.cloudinary.com/ecx/image/upload/v1640365918/Avant-Garde/Team/18_1_8_ytyr8l.png"
+            },
+            {
+                name: "Stanley",
+                imgLink: "https://res.cloudinary.com/ecx/image/upload/v1640365918/Avant-Garde/Team/18_1_8_ytyr8l.png"
+            },
+            {
+                name: "Stanley",
+                imgLink: "https://res.cloudinary.com/ecx/image/upload/v1640365918/Avant-Garde/Team/18_1_8_ytyr8l.png"
+            },
+        ]
+    },
+    {
+        name: "Food Preparation and Cooking",
+        department: "Back of House",
+        priority: "Very high",
+        status: "review",
         deadline: "Aug 04 2023",
         assignedTeam: [
             {
@@ -65,7 +98,86 @@ const mockTeam = [
 ]
 
 
+const statusOptions = [
+    {
+        value: "in-progress",
+        label: "In progress",
+        color: "#EDA12F",
+        bgColor: "#FFF5E6"
+    },
+    {
+        value: "review",
+        label: "Review",
+        color: "#7B68EE",
+        bgColor: "rgba(229, 225, 252, 0.40)"
+    },
+    {
+        value: "completed",
+        label: "Completed",
+        color: "#069952",
+        bgColor: "rgba(230, 255, 243, 0.70)"
+    },
+    {
+        value: "overdue",
+        label: "Overdue",
+        color: "#E62E2E",
+        bgColor: "#FFE6E6"
+    },
+]
+
 function Dashboard() {
+    const barChartConfig = {
+        data: {
+        columns: [
+            ["data1", 30, 200, 100, 400, 150, 250],
+        ],
+        type: bar(),
+        },
+        bar: {
+            width: {
+                ratio: 0.5
+            }
+        },
+        bindto: "#work_performance"
+    }
+
+    const donutChartConfig = {
+        data: {
+          columns: [
+            ["data1", 30],
+          ],
+          type: donut(),
+        },
+
+        donut: {
+          title: "Days"
+        },
+
+        bindto: "#days_time_off_taken"
+    }
+
+    const employeeDonutChartConfig = {
+        data: {
+          columns: [
+            ["data1", 30],
+          ],
+          type: donut(),
+        },
+
+        donut: {
+          title: "Days"
+        },
+
+        bindto: "#employee_time_off"
+    }
+
+    useEffect(() => {
+        bb.generate(donutChartConfig)
+        bb.generate(employeeDonutChartConfig)
+        bb.generate(barChartConfig)
+    })
+
+
 
 
     const SummaryCard = ({title, amount, comparsion, percentage, increase=false}:SummaryCardProps) => {
@@ -98,13 +210,15 @@ function Dashboard() {
 
     const TableData = ({ children }:TableDataProps ) => {
         return (
-            <td className="py-3 px-6">
+            <td className="py-3 px-6 !h-auto">
                 {children}
             </td>
         )
     }
 
     const TableRow = ({ name, department, priority, status, deadline, assignedTeam }:TableRowProps) => {
+        const [ statusValue, setStatusValue ] = useState(status)
+
         return (
             <tr>
                 <TableData>
@@ -117,19 +231,18 @@ function Dashboard() {
                     <h3 className="text-body-sm text-grayscale-60">{priority}</h3>
                 </TableData>
                 <TableData>
-                    <select value={status}>
-                        <option>In progress</option>
-                        <option>Review</option>
-                        <option>Completed</option>
-                        <option>Overdue</option>
-                    </select>
+                    <CustomSelect
+                        value={statusValue}
+                        setValue={setStatusValue}
+                        values={statusOptions}
+                    />
                 </TableData>
                 <TableData>
                     <h3 className="text-body-sm text-grayscale-60">{deadline}</h3>
                 </TableData>
                 <TableData>
                     <div>
-                        <div className="flex">
+                        <div className="flex flex-row">
                             {
                                 assignedTeam.map((member, idx) => {
                                     return (
@@ -208,9 +321,8 @@ function Dashboard() {
                             </button>
                         </div>
                         <div>
-
+                            <div id="work_performance"></div>
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -257,7 +369,7 @@ function Dashboard() {
                             </select>
                         </div>
                         <div>
-                            {/* Graph */}
+                            <div id="days_time_off_taken"></div>
                         </div>
                     </div>
                     <div>
@@ -270,7 +382,7 @@ function Dashboard() {
                             </select>
                         </div>
                         <div>
-                            {/* Graph */}
+                            <div id="employee_time_off"></div>
                         </div>
                     </div>
                 </div>
