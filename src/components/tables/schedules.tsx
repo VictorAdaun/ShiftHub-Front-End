@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import { useReactTable, getCoreRowModel, flexRender } from '@tanstack/react-table'
 import type { ColumnDef } from "@tanstack/react-table"
 import "../../styles/schedule.scss"
