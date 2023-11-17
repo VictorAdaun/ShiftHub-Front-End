@@ -114,6 +114,15 @@ export default {
         ...baseColors,
         ...extendedPalettes,
         ...utilityColors
+      },
+      gridTemplateColumns: {
+        "summary-cards-grid": "repeat(auto-fit, minmax(200px, 1fr))",
+      },
+      letterSpacing: {
+        "standard": "-0.16px"
+      },
+      boxShadow: {
+        "level-2": "0px 12px 16px -4px rgba(16, 24, 40, 0.04), 0px 4px 6px -2px rgba(16, 24, 40, 0.03)"
       }
     },
   },
