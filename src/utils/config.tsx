@@ -13,6 +13,6 @@ export const config: Config = {
     
     API_URL: NEXT_PUBLIC_API_URL
     */
-    // API_URL: 'https://.herokuapp.com',
+    API_URL: 'https://ezscheduler-v1.onrender.com',
   };
   

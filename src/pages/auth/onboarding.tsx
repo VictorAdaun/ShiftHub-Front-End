@@ -1,9 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import AuthLayout from "../../layouts/auth";
 import Trash from "../../assets/trash.svg";
 import Plus from "../../assets/Plus.svg";
-// import ReactPortal from '../../Reactportal'
-import Modal from "../../components/scrollable-modal";
+import Modal from "../../components/modal";
 import PrimaryButton from "../../components/button/primary-button";
 import Close from "../../assets/svgs/close-circle.svg";
 import Avatar from "../../assets/imgs/sample-avatar.png";
@@ -14,24 +13,29 @@ import constants from "../../utils/constants";
 import FormError from "../../components/form/form-error";
 import CreatableSelect from "react-select/creatable";
 import Icon from "../../components/icon";
+import axiosInstance from "../../utils/axios";
+import Loader from "../../assets/whiteLoader.gif"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../context/auth";
+import { useQuery, useMutation } from "react-query";
+import { AxiosError } from "axios";
 
-interface IFormInput {
+
+interface ISignupParams {
   company_name: string;
   company_address: string;
   week: string;
-  department: string;
+  departments: Array<{ roles }>;
   roles: Array<{ value; label }>;
-  employee_name: string;
-  employee_mail: string;
-  employee_role: string;
-  employee_type: string;
 }
 
 const schema = yup
   .object({
-    company_name: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
-    company_address: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
-    week: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    companyName: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    companyAddress: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    scheduleStartDay: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
     departments: yup.array().of(
       yup.object().shape({
         departmentName: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
@@ -46,13 +50,18 @@ const schema = yup
           .required(constants.FIELD_REQUIRED_MESSAGE),
       })
     ),
-    employee_name: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
-    employee_mail: yup
+  })
+  .required();
+
+const schema2 = yup
+  .object({
+    fullName: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    email: yup
       .string()
       .required(constants.FIELD_REQUIRED_MESSAGE)
       .email("This field should contain a valid email"),
-    employee_role: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
-    employee_type: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    role: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+    employeeType: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
   })
   .required();
 
@@ -62,12 +71,18 @@ type optionType = {
 };
 
 function Onboarding() {
-  const options: optionType[] = [
-    { value: "chocolate", label: "Chocolate" },
-    { value: "strawberry", label: "Strawberry" },
-    { value: "vanilla", label: "Vanilla" },
-  ];
 
+  const navigate = useNavigate()
+  const otpRef = useRef(null)
+  const ctx = useAuthContext()
+
+  // const options: optionType[] = [
+  //   { value: "chocolate", label: "Chocolate" },
+  //   { value: "strawberry", label: "Strawberry" },
+  //   { value: "vanilla", label: "Vanilla" },
+  // ];
+
+  // Form for step 1 and 2
   const {
     register,
     handleSubmit,
@@ -86,21 +101,161 @@ function Onboarding() {
     name: "departments",
   });
 
-  const handleSignup = (data: IFormInput) => {
-    console.log(data);
-  };
-
-  const [onboardStep, setOnboardStep] = useState(1);
-  const [isInviteModalOpen, setInviteModalOpen] = useState(false);
-  const [isWelcomeModalOpen, setWelcomeModalOpen] = useState(false);
-
   const appendDept = () => {
     append({ departmentName: "" });
   };
 
+  // Form for step 3
+  const {
+    register: registerInvite,
+    handleSubmit: handleSubmitInvite,
+    formState: { errors: errorsInvite },
+    reset: resetInvite,
+    control: controlInvite,
+    setValue: setValueInvite
+  } = useForm({
+    resolver: yupResolver(schema2),
+  });
+
+  const [onboardStep, setOnboardStep] = useState(1);
+  const [isInviteModalOpen, setInviteModalOpen] = useState(false);
+  const [isWelcomeModalOpen, setWelcomeModalOpen] = useState(false)
+
+
+  const arrangeRoles = (data) => {
+    const updatedDept = data.departments.map((dept) => {
+      const updatedRoles = dept.roles.map((role) => role.value)
+
+      return { ...dept, roles: updatedRoles }
+    })
+
+    return { ...data, departments: updatedDept }
+  }
+
+  // Onboard section
+
+  const onboardRequest = (data: ISignupParams) => {
+    return axiosInstance.post("/api/auth/signup", data)
+  }
+
+  const onboardMutation = useMutation({
+    mutationFn: onboardRequest,
+    onSuccess: (data) => {
+      console.log(data)
+
+      setOnboardStep(4)
+    },
+    onError: (err) => {
+      console.log(err)
+
+      if (err instanceof AxiosError) {
+        toast.error(err.response.data?.message || "An error occured")
+      }
+    }
+  })
+
+  const handleSignup = (data: ISignupParams) => {
+
+    const userData = JSON.parse(localStorage.getItem("signup"))
+
+    const newData = arrangeRoles(data)
+
+    onboardMutation.mutate({ ...userData, ...newData })
+
+  };
+
+
+  // Invite section
+  const companyId = JSON.parse(localStorage.getItem("user"))?.companyId
+
+  const inviteRequest = (data) => {
+    return axiosInstance.post(`/api/auth/invite/${companyId}`, data)
+  }
+
+  const inviteMutation = useMutation({
+    mutationFn: inviteRequest,
+    onSuccess: (data) => {
+      console.log(data.data.result.message)
+
+      toast.success(data.data.result.message)
+
+      resetInvite()
+      setValueInvite("role", "")
+      setValueInvite("employeeType", "")
+    },
+    onError: (err) => {
+      console.log(err)
+
+      if (err instanceof AxiosError) {
+        toast.error(err.response.data?.message || "An error occured")
+      }
+    }
+  })
+
+  const handleInvite = (data) => {
+    inviteMutation.mutate(data)
+  }
+
+  // Fetch departments
+  const fetchDepts = async () => {
+    const { data } = await axiosInstance.get("/api/team/department")
+    return data
+  }
+  const departmentsQuery = useQuery("departments",
+    fetchDepts, {
+    enabled: false
+  })
+
+  // OTP section
+  const otpRequest = (data) => {
+    return axiosInstance.post("/api/auth/email/verify", data)
+  }
+
+
+  const otpMutation = useMutation({
+    mutationFn: otpRequest,
+    onSuccess: (data) => {
+      console.log(data)
+
+      // set access token and signup status
+      localStorage.setItem("isSigned", "true")
+      localStorage.setItem("accessToken", data.data.result.token)
+      localStorage.setItem("user", JSON.stringify(data.data.result))
+
+      ctx.setData({ ...ctx, isSigned: true, token: data.data.result.token })
+
+      toast.success("Success!")
+
+      departmentsQuery.refetch()
+
+      setTimeout(() => {
+        setOnboardStep(3)
+      }, 3000);
+    },
+    onError: (err) => {
+      console.log(err)
+
+      if (err instanceof AxiosError) {
+        toast.error(err.response.data?.message || "An error occured")
+      }
+    }
+  })
+
+  const handleOTP = () => {
+
+    const userMail = JSON.parse(localStorage.getItem("signup")).email
+
+    const data = {
+      email: userMail,
+      code: otpRef.current.value
+    }
+
+    otpMutation.mutate(data)
+  }
+
+
   return (
     <AuthLayout>
-      {/* <ReactPortal wrapperId="portal"> */}
       <Modal
         handleClose={() => setInviteModalOpen(false)}
         isOpen={isInviteModalOpen}
@@ -122,18 +277,19 @@ function Onboarding() {
           </PrimaryButton>
         </div>
       </Modal>
-      {/* </ReactPortal> */}
 
       <Modal
         handleClose={() => setWelcomeModalOpen(false)}
         isOpen={isWelcomeModalOpen}
       >
-        <div className="welcome-modal flex text-left w-full h-full">
-          <div className="w-1/2 bg-welcome-image bg-no-repeat bg-cover bg-center"></div>
+        <div className="welcome-modal flex text-left w-[700px] h-[400px] bg-white rounded-md">
+          <div className="w-1/2 bg-welcome-image bg-no-repeat bg-cover bg-center rounded-l-md"></div>
           <div className="w-1/2 flex flex-col justify-center items-start m-auto h-[90%] px-4">
-            <img src={Close} alt="close" className="ml-auto mb-4" />
-            <h3 className="mb-2">Welcome to EZ Scheduler, John Doe</h3>
-            <p className="text-[10px] text-[#667085] mb-4">
+            <div className="ml-auto mb-4 cursor-pointer" onClick={() => setWelcomeModalOpen(false)}>
+              <img src={Close} alt="close" />
+            </div>
+            <h3 className="mb-2 text-[18px]">Welcome to EZ Scheduler, John Doe</h3>
+            <p className="text-[16px] text-[#667085] mb-4">
               Lörem ipsum faliga makroter att märell, nysonat, i mikronomi. Bett
               vinstvarning hexadossade käpåktigt. Sona metagraf emedan pidys.
               Talpenna curlingförälder gåsam, i tenyns trefasamma.{" "}
@@ -141,13 +297,15 @@ function Onboarding() {
             <PrimaryButton
               className="mt-auto ml-auto"
               sm
-              onClick={() => console.log("holdd")}
+              onClick={() => navigate("/")}
             >
               Continue
             </PrimaryButton>
           </div>
         </div>
       </Modal>
+
+      <ToastContainer />
 
       <div className="onboarding w-[80%] md:w-full max-w-[425px] h-auto mx-auto my-12 text-center">
         <div className="timeline flex justify-between items-center mx-auto mb-4 w-3/4 mt-10">
@@ -177,16 +335,17 @@ function Onboarding() {
               }`}
           ></hr>
           <div
-            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${onboardStep >= 4 ? "bg-lydia" : null
+            className={`w-8 h-8 rounded-full flex items-center justify-center border border-solid border-lydia ${onboardStep >= 5 ? "bg-lydia" : null
               }`}
           >
-            {onboardStep >= 4 ? (
+            {onboardStep >= 5 ? (
               <Icon name="check" />
             ) : (
               <span className="text-sm font-normal text-lydia">3</span>
             )}
           </div>
         </div>
+
         {onboardStep === 1 ? (
           <>
             <h1 className="my-2 text-2xl">Let's get to know you</h1>
@@ -202,7 +361,7 @@ function Onboarding() {
               You can always add more later.
             </p>
           </>
-        ) : (
+        ) : onboardStep === 3 ? (
           <>
             <h1 className="my-2 text-2xl">Collaborate with your teammates</h1>
             <p className="text-lg mb-4 font-light tracking-wide text-[#667085]">
@@ -210,46 +369,46 @@ function Onboarding() {
               improves with EZ Scheduler.
             </p>
           </>
-        )}
+        ) : null}
 
         <form className="w-full" onSubmit={handleSubmit(handleSignup)}>
           {onboardStep === 1 ? (
             <div className="first-step">
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="company_name" className="text-sm">
+                <label htmlFor="companyName" className="text-sm">
                   Company Name
                 </label>
                 <input
                   type="text"
-                  name="company_name"
-                  id="company_name"
+                  name="companyName"
+                  id="companyName"
                   placeholder="e.g John Doe's Restaurant"
-                  {...register("company_name")}
+                  {...register("companyName")}
                   className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
                 />
-                {errors.company_name && (
-                  <FormError error={errors.company_name.message} />
+                {errors.companyName && (
+                  <FormError error={errors.companyName.message} />
                 )}
               </div>
 
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="company_address" className="text-sm">
+                <label htmlFor="companyAddress" className="text-sm">
                   Company Address
                 </label>
                 <input
                   type="text"
-                  name="company_address"
-                  id="company_address"
+                  name="companyAddress"
+                  id="companyAddress"
                   placeholder="Enter an address or city"
-                  {...register("company_address")}
+                  {...register("companyAddress")}
                   className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
                 />
                 <em className="not-italic text-sm font-light tracking-wide text-[#667085]">
                   This helps us give you accurate, location-based compliance
                   info
                 </em>
-                {errors.company_address && (
-                  <FormError error={errors.company_address.message} />
+                {errors.companyAddress && (
+                  <FormError error={errors.companyAddress.message} />
                 )}
               </div>
 
@@ -258,23 +417,27 @@ function Onboarding() {
                   What day of the week do your schedules start?
                 </label>
                 <select
-                  name="week"
-                  id="week"
-                  {...register("week")}
+                  name="scheduleStartDay"
+                  id="scheduleStartDay"
+                  {...register("scheduleStartDay")}
+                  defaultValue=""
                   className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
                 >
-                  <option value="Monday">Monday</option>
+                  <option value="" disabled>Select day</option>
+                  {["MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"].map((day, id) => (
+                    <option key={id} value={day}>{day}</option>
+                  ))}
                 </select>
-                {errors.week && <FormError error={errors.week.message} />}
+                {errors.scheduleStartDay && <FormError error={errors.scheduleStartDay.message} />}
               </div>
 
               <PrimaryButton
                 type="button"
                 onClick={async () => {
                   const isValid = await trigger([
-                    "company_name",
-                    "company_address",
-                    "week",
+                    "companyName",
+                    "companyAddress",
+                    "scheduleStartDay",
                   ]);
                   if (!isValid) return;
 
@@ -328,7 +491,7 @@ function Onboarding() {
                               }}
                               {...field}
                               isMulti
-                              options={options}
+                            // options={options}
                             />
                           )}
                         />
@@ -359,109 +522,147 @@ function Onboarding() {
                 Add department
               </p>
               <PrimaryButton
-                type="button"
-                onClick={async () => {
-                  const isValid = await trigger(["departments"]);
-                  if (!isValid) return;
-
-                  setOnboardStep(3);
-                }}
+                type="submit"
               >
-                Continue
+                {onboardMutation.isLoading ? <img className="h-[30px] w-[30px] mx-auto" src={Loader} alt="loader" /> : "Continue"}
               </PrimaryButton>
             </div>
-          ) : (
+          ) : onboardStep === 4 ? (
+            <div className="">
+              <h1 className="text-2xl text-lydia mt-8 mb-2">ACCOUNT VERIFICATION</h1>
+              <p className="mb-8">An OTP has been sent to your mail</p>
+              <div className="flex flex-col text-left">
+                <label>Enter OTP</label>
+                <input placeholder="Enter OTP" type="number" className="appearance-none border border-solid border-grayscale-40 rounded-md p-4 mt-2 mb-4" ref={otpRef} />
+              </div>
+              <PrimaryButton type="button" onClick={() => {
+                console.log(otpRef.current.value)
+
+                handleOTP()
+              }}>{otpMutation.isLoading ? <img className="h-[30px] w-[30px] mx-auto" src={Loader} alt="loader" /> : "Proceed"}</PrimaryButton>
+            </div>
+          ) : null}
+        </form>
+
+        {onboardStep === 3 ?
+          <form className="w-full" onSubmit={handleSubmitInvite(handleInvite)}>
             <div className="third-step">
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="employee_name" className="text-sm">
+                <label htmlFor="fullName" className="text-sm">
                   Employee Name
                 </label>
                 <input
-                  {...register("employee_name")}
+                  {...registerInvite("fullName")}
                   type="text"
-                  name="employee_name"
-                  id="employee_name"
+                  name="fullName"
+                  id="fullName"
                   placeholder="e.g John Doe"
                   className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
                 />
-                {errors.employee_name && (
-                  <FormError error={errors.employee_name.message} />
+                {errorsInvite.fullName && (
+                  <FormError error={errorsInvite.fullName.message} />
                 )}
               </div>
 
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="employee_mail" className="text-sm">
+                <label htmlFor="email" className="text-sm">
                   Employee’s Email Address
                 </label>
                 <input
-                  {...register("employee_mail")}
+                  {...registerInvite("email")}
                   type="email"
-                  name="employee_mail"
-                  id="employee_mail"
+                  name="email"
+                  id="email"
                   placeholder="e.g. johndoe@email.com"
                   className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
                 />
-                {errors.employee_mail && (
-                  <FormError error={errors.employee_mail.message} />
+                {errorsInvite.email && (
+                  <FormError error={errorsInvite.email.message} />
                 )}
               </div>
 
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="employee_role" className="text-sm">
+                <label htmlFor="role" className="text-sm">
                   What would their role be?
                 </label>
-                <select
-                  {...register("employee_role")}
-                  name="employee_role"
-                  id="employee_role"
-                  className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
-                >
-                  <option value="chef">Chef</option>
-                </select>
+                <Controller
+                  name="role"
+                  control={controlInvite}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      defaultValue={""}
+                      className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
+                    >
+                      <option value="" disabled>Select...</option>
+                      {departmentsQuery.data?.result.data.map((dept, id) => {
+                        return (
+                          <optgroup key={id} label={dept.title} className="font-light">
+                            {dept.roles.map((role, id) => {
+                              return (
+                                <option key={id} value={role.id}>{role.title}</option>
+                              );
+                            })}
+                          </optgroup>
+                        )
+                      }
+                      )}
+                    </select>
+                  )}
+                />
+
                 <em className="not-italic text-sm font-light tracking-wide text-[#667085]">
                   This is based off the departments created
                 </em>
-                {errors.employee_role && (
-                  <FormError error={errors.employee_role.message} />
-                )}
+                {errorsInvite.role && <FormError error={errorsInvite.role.message} />}
               </div>
 
               <div className="field flex flex-col items-start gap-2 mb-6">
-                <label htmlFor="employee_type" className="text-sm">
+                <label htmlFor="employeeType" className="text-sm">
                   Employee Type
                 </label>
-                <select
-                  {...register("employee_type")}
-                  name="employee_type"
-                  id="employee_type"
-                  className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
-                >
-                  <option value="typeA">Type A</option>
-                </select>
+                <Controller
+                  name="employeeType"
+                  control={controlInvite}
+                  rules={{ required: true }}
+                  render={({ field }) => (
+                    <select
+                      {...field}
+                      defaultValue={""}
+                      className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2"
+                    >
+                      <option value="" disabled>Select...</option>
+                      <option value="ADMIN">ADMIN</option>
+                      <option value="MANAGER">MANAGER</option>
+                      <option value="EMPLOYEE">EMPLOYEE</option>
+                    </select>
+                  )}
+                />
                 <em className="not-italic text-sm font-light tracking-wide text-[#667085]">
                   This can be updated in-app
                 </em>
-                {errors.employee_type && (
-                  <FormError error={errors.employee_type.message} />
+                {errorsInvite.employeeType && (
+                  <FormError error={errorsInvite.employeeType.message} />
                 )}
               </div>
 
               <button
-                type="button"
+                type="submit"
                 className="w-full py-2 border-none text-white bg-lydia rounded-md text-sm"
-                onClick={() => setOnboardStep(1)}
               >
-                Send Invite
+                {inviteMutation.isLoading ? <img className="h-[30px] w-[30px] mx-auto" src={Loader} alt="loader" /> : "Send Invite"}
               </button>
               <button
-                type="submit"
+                type="button"
                 className="w-full py-2 border-none bg-white text-lydia rounded-md text-sm mt-4"
+                onClick={() => setWelcomeModalOpen(true)}
               >
                 Skip for now
               </button>
             </div>
-          )}
-        </form>
+          </form> : null}
+
       </div>
     </AuthLayout>
   );

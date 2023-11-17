@@ -8,6 +8,7 @@ import SettingIcon from "../../assets/svgs/dashboard/menu/setting.svg";
 import LogoutIcon from "../../assets/svgs/dashboard/menu/logout.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../utils/functions";
+import { useAuthContext } from "../../context/auth";
 
 interface SubmenuItem {
   title: string;
@@ -87,8 +88,11 @@ function DashboardSidebar() {
     path,
     submenu,
   }: DashboardItemProps) => {
+
+    const ctx = useAuthContext()
+
     const isActive =
-          title !== "dashboard" ? pathname.includes(path) : pathname === path;
+      title !== "dashboard" ? pathname.includes(path) : pathname === path;
 
     const navigateAction = (path: string) => {
       if (isActive && submenu) {
@@ -101,7 +105,18 @@ function DashboardSidebar() {
     return (
       <div className="w-full">
         <button
-          onClick={() => navigateAction(path)}
+          onClick={() => {
+            if (title === "log out") {
+              localStorage.setItem("isSigned", "false")
+              localStorage.removeItem("accessToken")
+              localStorage.removeItem("user")
+
+              ctx.setData({ ...ctx, isSigned: false, token: undefined })
+
+            }
+
+            navigateAction(path)
+          }}
           className={classNames(
             "flex gap-2 px-4 py-2 items-center rounded-md w-full",
             isActive ? "text-lydia bg-grayscale-10" : ""
@@ -112,19 +127,19 @@ function DashboardSidebar() {
           </div>
           <h3 className="text-body-large capitalize font-normal">{title}</h3>
         </button>
-        
+
         <div className={classNames("ml-[26px]", isActive ? "block" : "hidden")}>
           {submenu ? submenu.map((submenuItem, idx) => {
-              const isSubmenuActive = pathname === (path + submenuItem.path)
-              
-                return (
-                  <Link key={idx} to={`${path}${submenuItem.path}`}>
-                    <h6 className={classNames("text-body-sm capitalize py-2 px-7 border-l-2 border-l-grayscale-40", isSubmenuActive ? "text-lydia border-l-lydia" : "" )}>
-                      {submenuItem.title}
-                    </h6>
-                  </Link>
-                );
-              })
+            const isSubmenuActive = pathname === (path + submenuItem.path)
+
+            return (
+              <Link key={idx} to={`${path}${submenuItem.path}`}>
+                <h6 className={classNames("text-body-sm capitalize py-2 px-7 border-l-2 border-l-grayscale-40", isSubmenuActive ? "text-lydia border-l-lydia" : "")}>
+                  {submenuItem.title}
+                </h6>
+              </Link>
+            );
+          })
             : null}
         </div>
       </div>
@@ -160,7 +175,7 @@ function DashboardSidebar() {
         </h5>
         <div>
           <DashboardItem title="settings" Icon={SettingIcon} path="/settings" />
-          <DashboardItem title="log out" Icon={LogoutIcon} path="/logout" />
+          <DashboardItem title="log out" Icon={LogoutIcon} path="/login" />
         </div>
       </div>
     </aside>
