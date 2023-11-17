@@ -1,0 +1,17 @@
+.gridLayout{
+    display: grid;
+    grid-template-areas:
+        'navbar navbar navbar'
+        'sidebar aside aside'
+        'sidebar content content';
+    grid-template-columns: 273px 1fr;
+
+    aside{
+        grid-area: sidebar;
+    }
+
+    .content{
+        grid-area: content;
+    }
+}
+

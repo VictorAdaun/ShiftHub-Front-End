@@ -82,7 +82,7 @@ export default {
         "fill": "-webkit-fill-available",
       },
       backgroundImage: {
-        "welcome-image": "url('./src/assets/illustrations/welcome-illustration.svg')",
+        "welcome-image": "url('/src/assets/illustrations/welcome-illustration.svg')",
       },
       fontFamily: {
         body: ["'Helvetica Neue'", "sans-serif"]

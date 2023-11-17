@@ -3,12 +3,12 @@ import "../../../styles/schedule.scss"
 import Icon from "../../../components/icon"
 import PrimaryButton from "../../../components/button/primary-button"
 import Empty from "../../../assets/illustrations/NewBeginnings.svg"
-import Modal from "../../../components/modal"
-import Avatar from "../../../assets/imgs/sample-avatar.png"
+import { Link, useNavigate } from "react-router-dom"
 
 
 
 function Task() {
+    const navigate = useNavigate();
 
     // date format logic
     const months = [
@@ -47,7 +47,7 @@ function Task() {
 
     // end
 
-    const [emptyState, setEmptyState] = useState(true);
+    const [emptyState, setEmptyState] = useState(false);
 
     const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
@@ -68,7 +68,7 @@ function Task() {
 
     return (
         <>
-            <div className="container w-[90%] mx-auto mt-8 h-auto">
+            <div className="container w-[90%] mx-auto mt-8 mb-[75px] h-auto">
                 <div className="breadcrumbs flex gap-2 text-grayscale-60 font-normal">
                     <Icon name="calendar" />
                     {paths.map((path, id) => {
@@ -176,7 +176,7 @@ function Task() {
                                     <div className="flex items-center gap-4">
                                         <Icon name="closeGrey" />
                                         <Icon name="tick" />
-                                        <p className="text-lydia">View</p>
+                                        <Link to="/task/view" className="text-lydia">View</Link>
                                     </div>
                                 </div>
                             );

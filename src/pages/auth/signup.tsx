@@ -7,6 +7,7 @@ import * as yup from "yup"
 import { yupResolver } from "@hookform/resolvers/yup"
 import constants from "../../utils/constants"
 import FormError from "../../components/form/form-error"
+import { useNavigate } from "react-router-dom"
 
 interface IFormInput {
     name: string,
@@ -17,14 +18,18 @@ interface IFormInput {
 
 const schema = yup
     .object({
-        name: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
+        fullName: yup.string().required(constants.FIELD_REQUIRED_MESSAGE),
         email: yup.string().required(constants.FIELD_REQUIRED_MESSAGE).email("This field should contain a valid email"),
-        password: yup.string().required(constants.FIELD_REQUIRED_MESSAGE).min(8, 'Not long enough'),
-        confirm_password: yup
+        password: yup.string().required(constants.FIELD_REQUIRED_MESSAGE).min(8, 'Not long enough')
+        .matches(/^(?=.*[a-z])/, 'Must contain at least one lowercase character')
+        .matches(/^(?=.*[A-Z])/, 'Must contain at least one uppercase character')
+        .matches(/^(?=.*[0-9])/, 'Must contain at least one number')
+        .matches(/^(?=.*[!@#%&])/, 'Must contain at least one special character'),
+        confirmPassword: yup
             .string()
             .required(constants.FIELD_REQUIRED_MESSAGE)
             .test(
-                "confirm_password",
+                "confirmPassword",
                 "Passwords do not match",
                 (value, validationContext) => {
                     const { parent } = validationContext;
@@ -35,6 +40,9 @@ const schema = yup
     .required();
 
 function Signup() {
+
+    const navigate = useNavigate()
+
     const {
         register,
         handleSubmit,
@@ -43,6 +51,10 @@ function Signup() {
 
     const handleSignup = (data: IFormInput) => {
         console.log(data)
+
+        localStorage.setItem("signup", JSON.stringify(data))
+
+        navigate("/onboarding/")
     }
 
     const socialMediaSignup = () => {
@@ -67,15 +79,15 @@ function Signup() {
 
                 <form className="w-full" onSubmit={handleSubmit(handleSignup)}>
                     <div className="field flex flex-col items-start gap-2 mb-6">
-                        <label htmlFor="name" className="text-sm">Name</label>
+                        <label htmlFor="fullName" className="text-sm">Name</label>
                         <input
-                            {...register("name")}
+                            {...register("fullName")}
                             type="text"
-                            name="name"
-                            id="name"
+                            name="fullName"
+                            id="fullName"
                             placeholder="e.g John Doe"
                             className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
-                        {errors.name && <FormError error={errors.name.message}></FormError>}
+                        {errors.fullName && <FormError error={errors.fullName.message}></FormError>}
                     </div>
 
                     <div className="field flex flex-col items-start gap-2 mb-6">
@@ -104,15 +116,15 @@ function Signup() {
                         </div>
 
                         <div className="field w-full flex flex-col items-start gap-2 mb-6">
-                            <label htmlFor="confirm_password" className="text-sm">Confirm Password</label>
+                            <label htmlFor="confirmPassword" className="text-sm">Confirm Password</label>
                             <input
-                                {...register("confirm_password")}
+                                {...register("confirmPassword")}
                                 type="password"
-                                name="confirm_password"
-                                id="confirm_password"
+                                name="confirmPassword"
+                                id="confirmPassword"
                                 placeholder="Confirm Password"
                                 className="w-full box-border border border-solid border-[#D0D5DD] text-[#667085] rounded-md py-2 text-sm placeholder:text-[#667085] outline-none pl-2" />
-                            {errors.confirm_password && <FormError error={errors.confirm_password.message}></FormError>}
+                            {errors.confirmPassword && <FormError error={errors.confirmPassword.message}></FormError>}
                         </div>
                     </div>
 

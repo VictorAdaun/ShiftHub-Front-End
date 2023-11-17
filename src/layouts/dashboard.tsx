@@ -4,13 +4,14 @@ import SearchIcon from '../assets/svgs/dashboard/search-icon.svg'
 import MarkIcon from '../assets/svgs/dashboard/mark.svg'
 import AvatarImg from '../assets/imgs/sample-dashboard-avatar.png'
 import { Outlet } from 'react-router-dom'
+import "../styles/dashboardLayout.scss"
 
 
 function DashboardLayout() {
     return (
-        <main className='flex'>
+        <main className='gridLayout'>
             <DashboardSidebar/>
-            <section className='w-full'>
+            <section className='w-full content'>
                 <div className='flex justify-between border-b border-b-grayscale-30 px-8 py-[19.5px]'>
                     <div className='flex gap-4 items-center'>
                         <img src={SearchIcon} alt='Search icon'/>
