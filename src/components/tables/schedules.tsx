@@ -118,7 +118,7 @@ export const SchedulesTable = <T extends object>({ data, columns, extraData }: R
             </Scheduledrawer>
 
             {extraData.dropDown === "Weekly" ?
-                <table className='table w-full text-left text-sm border-separate my-8'>
+                <table className='scheduleTable w-full text-left text-sm border-separate my-8'>
                     <thead>
                         {table.getHeaderGroups().map(headerGroup => {
                             return (

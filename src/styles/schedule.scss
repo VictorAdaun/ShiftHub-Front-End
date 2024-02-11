@@ -1,11 +1,12 @@
 /* Schedule table styling (CSS) */
 
-table {
+.scheduleTable {
     border-collapse: separate;
     border-spacing: 0;
     overflow: hidden;
-    font: menu
-        /* For now (till font issue gets fixed) */
+    font: menu;
+    /* For now (till font issue gets fixed) */
+
 }
 
 th {
@@ -90,6 +91,94 @@ th div {
     justify-content: flex-start;
     align-items: center;
     gap: 5px;
+}
+
+.employeeTable {
+    border-collapse: separate;
+    border-spacing: 0;
+    overflow: hidden;
+    font: menu;
+    /* For now (till font issue gets fixed) */
+
+
+    th {
+        font-weight: normal !important;
+    }
+
+    th,
+    td {
+        padding: 10px;
+        border: 1px solid #EAECF0;
+        border-bottom: none;
+        border-right: none;
+    }
+
+    th:last-child {
+        border-right: 1px solid #EAECF0;
+    }
+
+    td {
+        border-bottom: none;
+        border-right: none;
+    }
+
+    td:not(:last-child) {
+        border-bottom: none;
+        border-right: none;
+    }
+
+    tr:last-child td {
+        border-bottom: 1px solid #EAECF0;
+    }
+
+    tr td:last-child {
+        border-right: 1px solid #EAECF0;
+    }
+
+    tr:first-child th:first-child {
+        border-top-left-radius: 0px;
+    }
+
+    tr:first-child th:last-child {
+        border-top-right-radius: 0px;
+    }
+
+    tr:last-child td:first-child {
+        border-bottom-left-radius: 0px;
+    }
+
+    tr:last-child td:last-child {
+        border-bottom-right-radius: 0px;
+    }
+
+    /* Styling table cells */
+
+    td div {
+        display: flex;
+        flex-direction: column;
+        height: inherit;
+        justify-content: center;
+    }
+
+    td div em,
+    th div em,
+    th:first-child {
+        font-style: normal;
+        color: #667085;
+    }
+
+    td div p,
+    th div p {
+        font-weight: 500;
+    }
+
+    th div {
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+        gap: 5px;
+    }
+
 }
 
 // Basic table styles CSS End here

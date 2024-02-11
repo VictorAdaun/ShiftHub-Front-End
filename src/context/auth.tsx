@@ -13,11 +13,10 @@ interface AuthContextType {
   loading: boolean;
   token: string | undefined;
   scheduleData: Shift[];
-  dateRange: string;
   currentWeek: string;
   currentYear: string;
   currentDate: string;
-  setData: React.Dispatch<React.SetStateAction<{ isSigned: boolean; loading: boolean; currentWeek: string, currentYear: string, currentDate: string; token: string | undefined, scheduleData: Shift[], dateRange: string }>>;
+  setData: React.Dispatch<React.SetStateAction<{ isSigned: boolean; loading: boolean; currentWeek: string, currentYear: string, currentDate: string; token: string | undefined, scheduleData: Shift[] }>>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -29,7 +28,7 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const diff = now.getTime() - startOfYear.getTime();
     const oneWeek = 1000 * 60 * 60 * 24 * 7;
     const week = Math.floor(diff / oneWeek);
-    return week + 1;
+    return week;
   };
 
   const getCurrentYear = () => {
@@ -41,11 +40,10 @@ const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     isSigned: false,
     loading: false,
     token: null,
-    dateRange: "-",
     scheduleData: null,
     currentWeek: getCurrentWeek().toString(),
     currentYear: getCurrentYear().toString(),
-    currentDate: null
+    currentDate: null,
   };
 
   const [data, setData] = useState(InitialState);

@@ -30,6 +30,22 @@ import Signup from './pages/auth/signup';
 import Onboarding from './pages/auth/onboarding';
 import SingleSchedule from './pages/dashboard/schedule/single-schedule';
 import WithAuth from './hoc/withauth';
+import Employee from './pages/dashboard/team/employee';
+import ImportCsv from './pages/dashboard/team/importCsv';
+
+import OnboardingEmployee from './pages/employee/auth/onboarding';
+import LoginEmployee from "./pages/employee/auth/login"
+import Overview from './pages/employee/overview/overview';
+import TaskDetailsEmployee from './pages/employee/overview/task-details';
+import Comments from './pages/employee/overview/comment';
+import Upcomingshifts from './pages/employee/overview/upcoming-shifts';
+import TimeoffOverview from './pages/employee/timeoff/overview';
+import TimeoffNewrequest from './pages/employee/timeoff/new-request';
+import TimeoffViewrequest from './pages/employee/timeoff/view-request';
+import Inbox from './pages/employee/auth/inbox/inboxLayout';
+import EmployeeNotification from './pages/employee/auth/inbox/notification';
+import EmployeeRequests from './pages/employee/auth/inbox/requests';
+import InboxLayout from './pages/employee/auth/inbox/inboxLayout';
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -56,8 +72,10 @@ const router = createBrowserRouter(
           </Route>
           <Route path='/team' element={<Outlet />}>
             <Route path='employees' element={<Employees />} />
+            <Route path='employees/:id' element={<Employee />} />
             <Route index element={<Navigate to="employees" replace />} />
             <Route path='employees' element={<Employees />} />
+            <Route path='employees/import-csv' element={<ImportCsv />} />
             <Route path='engagement' element={<Engagement />} />
           </Route>
           <Route path='/task' element={<Task />} />
@@ -87,6 +105,22 @@ const router = createBrowserRouter(
         path="*"
         element={<Navigate to="/login" replace />}
       />
+
+      {/* Employee routes */}
+      <Route path="/employee/onboarding" element={<OnboardingEmployee />} />
+      <Route path="/employee/login" element={<LoginEmployee />} />
+      <Route path="/employee/overview" element={<Overview />} />
+      <Route path='/employee/task-details' element={<TaskDetailsEmployee />} />
+      <Route path='/employee/comments' element={<Comments />} />
+      <Route path='/employee/upcoming-shifts' element={<Upcomingshifts />} />
+      <Route path='/employee/timeoff/overview' element={<TimeoffOverview />} />
+      <Route path='/employee/timeoff/new-request' element={<TimeoffNewrequest />} />
+      <Route path='/employee/timeoff/view-request' element={<TimeoffViewrequest />} />
+      
+      <Route path='/employee/timeoff/inbox/' element={<InboxLayout />}>
+          <Route index element={<EmployeeNotification/>}/>
+          <Route path='requests' element={<EmployeeRequests/>}/>
+      </Route>
     </>
   )
 )

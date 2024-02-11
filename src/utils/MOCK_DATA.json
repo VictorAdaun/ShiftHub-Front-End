@@ -1,369 +1,322 @@
 [
     {
         "id": 1,
-        "shift": "Morning",
-        "first_name": "Tamiko",
-        "last_name": "Pothergill",
-        "availability": {
-            "monday": {
-                "availability": false,
-                "individuals": [
-                    {
-                        "name": "ben on monday morning",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "9:00 AM",
-                "duration": "4hours"
-            },
-            "tuesday": {
-                "availability": false,
-                "individuals": [
-                    {
-                        "name": "ben on tuesday",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "9:30 AM",
-                "duration": "4hours"
-            },
-            "wednesday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben on wednesday",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "8:30 AM",
-                "duration": "4hours"
-            },
-            "thursday": {
-                "availability": false,
-                "individuals": [
-                    {
-                        "name": "ben on thursday",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "10:30 AM",
-                "duration": "4hours"
-            },
-            "friday": {
-                "availability": true,
-                "individuals": [
-                    { 
-                        "name": "ben on friday",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "11:30 AM",
-                "duration": "4hours"
-            },
-            "saturday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben on saturday",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "8:30 AM",
-                "duration": "4hours"
-            }
-        }
+        "employee": "ffletcher0",
+        "attendance": 64,
+        "shiftCompleted": 20,
+        "sickDays": 98,
+        "averageShiftDuration": 72
     },
     {
         "id": 2,
-        "shift": "Afternoon",
-        "first_name": "Rikki",
-        "last_name": "Rioch",
-        "availability": {
-            "monday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "12:30 PM",
-                "duration": "4hours"
-            },
-            "tuesday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "13:30 PM",
-                "duration": "4hours"
-            },
-            "wednesday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "15:30 PM",
-                "duration": "4hours"
-            },
-            "thursday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "12:30 PM",
-                "duration": "4hours"
-            },
-            "friday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "12:30 PM",
-                "duration": "4hours"
-            },
-            "saturday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "13:30 PM",
-                "duration": "3 hours"
-            }
-        }
+        "employee": "kconman1",
+        "attendance": 83,
+        "shiftCompleted": 56,
+        "sickDays": 87,
+        "averageShiftDuration": 49
     },
     {
         "id": 3,
-        "shift": "Evening",
-        "first_name": "Cass",
-        "last_name": "Bazelle",
-        "availability": {
-            "monday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "16:00 PM",
-                "duration": "4hours"
-            },
-            "tuesday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "16:30 PM",
-                "duration": "2 hours"
-            },
-            "wednesday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "17:30 PM",
-                "duration": "1 hours"
-            },
-            "thursday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "16:30 PM",
-                "duration": "2 hours"
-            },
-            "friday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "15:30 PM",
-                "duration": "3 hours"
-            },
-            "saturday": {
-                "availability": true,
-                "individuals": [
-                    {
-                        "name": "ben on saturday evening",
-                        "email": "ben@63.com"
-                    },
-                    {
-                        "name": "sam",
-                        "email": "sam@gmail.com"
-                    },
-                    {
-                        "name": "vick",
-                        "email": "vick@yahoo.com"
-                    }
-                ],
-                "start_time": "16:30 PM",
-                "duration": "3 hours"
-            }
-        }
+        "employee": "bstorah2",
+        "attendance": 2,
+        "shiftCompleted": 13,
+        "sickDays": 68,
+        "averageShiftDuration": 49
+    },
+    {
+        "id": 4,
+        "employee": "asucre3",
+        "attendance": 42,
+        "shiftCompleted": 30,
+        "sickDays": 26,
+        "averageShiftDuration": 12
+    },
+    {
+        "id": 5,
+        "employee": "llindores4",
+        "attendance": 82,
+        "shiftCompleted": 76,
+        "sickDays": 69,
+        "averageShiftDuration": 10
+    },
+    {
+        "id": 6,
+        "employee": "fmaskill5",
+        "attendance": 71,
+        "shiftCompleted": 76,
+        "sickDays": 15,
+        "averageShiftDuration": 46
+    },
+    {
+        "id": 7,
+        "employee": "hbraley6",
+        "attendance": 91,
+        "shiftCompleted": 31,
+        "sickDays": 81,
+        "averageShiftDuration": 63
+    },
+    {
+        "id": 8,
+        "employee": "jgrassett7",
+        "attendance": 24,
+        "shiftCompleted": 69,
+        "sickDays": 56,
+        "averageShiftDuration": 18
+    },
+    {
+        "id": 9,
+        "employee": "sclements8",
+        "attendance": 53,
+        "shiftCompleted": 87,
+        "sickDays": 34,
+        "averageShiftDuration": 27
+    },
+    {
+        "id": 10,
+        "employee": "dmacsharry9",
+        "attendance": 86,
+        "shiftCompleted": 6,
+        "sickDays": 85,
+        "averageShiftDuration": 78
+    },
+    {
+        "id": 11,
+        "employee": "jnewcoma",
+        "attendance": 80,
+        "shiftCompleted": 7,
+        "sickDays": 73,
+        "averageShiftDuration": 80
+    },
+    {
+        "id": 12,
+        "employee": "rfedorchenkob",
+        "attendance": 11,
+        "shiftCompleted": 87,
+        "sickDays": 96,
+        "averageShiftDuration": 92
+    },
+    {
+        "id": 13,
+        "employee": "rharcarsec",
+        "attendance": 21,
+        "shiftCompleted": 24,
+        "sickDays": 57,
+        "averageShiftDuration": 37
+    },
+    {
+        "id": 14,
+        "employee": "hdelacourtd",
+        "attendance": 36,
+        "shiftCompleted": 3,
+        "sickDays": 26,
+        "averageShiftDuration": 91
+    },
+    {
+        "id": 15,
+        "employee": "askitrale",
+        "attendance": 29,
+        "shiftCompleted": 38,
+        "sickDays": 46,
+        "averageShiftDuration": 40
+    },
+    {
+        "id": 16,
+        "employee": "oluckenf",
+        "attendance": 55,
+        "shiftCompleted": 97,
+        "sickDays": 69,
+        "averageShiftDuration": 70
+    },
+    {
+        "id": 17,
+        "employee": "rmawfordg",
+        "attendance": 78,
+        "shiftCompleted": 19,
+        "sickDays": 96,
+        "averageShiftDuration": 84
+    },
+    {
+        "id": 18,
+        "employee": "idorsayh",
+        "attendance": 55,
+        "shiftCompleted": 66,
+        "sickDays": 11,
+        "averageShiftDuration": 96
+    },
+    {
+        "id": 19,
+        "employee": "cduhameli",
+        "attendance": 50,
+        "shiftCompleted": 94,
+        "sickDays": 55,
+        "averageShiftDuration": 18
+    },
+    {
+        "id": 20,
+        "employee": "phouldinj",
+        "attendance": 9,
+        "shiftCompleted": 5,
+        "sickDays": 60,
+        "averageShiftDuration": 10
+    },
+    {
+        "id": 21,
+        "employee": "ifilipczynskik",
+        "attendance": 3,
+        "shiftCompleted": 40,
+        "sickDays": 13,
+        "averageShiftDuration": 18
+    },
+    {
+        "id": 22,
+        "employee": "bpaulingl",
+        "attendance": 95,
+        "shiftCompleted": 35,
+        "sickDays": 75,
+        "averageShiftDuration": 84
+    },
+    {
+        "id": 23,
+        "employee": "dcrutchleym",
+        "attendance": 22,
+        "shiftCompleted": 96,
+        "sickDays": 96,
+        "averageShiftDuration": 43
+    },
+    {
+        "id": 24,
+        "employee": "cmitchensonn",
+        "attendance": 90,
+        "shiftCompleted": 22,
+        "sickDays": 34,
+        "averageShiftDuration": 89
+    },
+    {
+        "id": 25,
+        "employee": "pdoego",
+        "attendance": 59,
+        "shiftCompleted": 64,
+        "sickDays": 94,
+        "averageShiftDuration": 34
+    },
+    {
+        "id": 26,
+        "employee": "bgillaspyp",
+        "attendance": 96,
+        "shiftCompleted": 76,
+        "sickDays": 73,
+        "averageShiftDuration": 19
+    },
+    {
+        "id": 27,
+        "employee": "mslucockq",
+        "attendance": 57,
+        "shiftCompleted": 17,
+        "sickDays": 13,
+        "averageShiftDuration": 28
+    },
+    {
+        "id": 28,
+        "employee": "mdeblasir",
+        "attendance": 42,
+        "shiftCompleted": 76,
+        "sickDays": 93,
+        "averageShiftDuration": 8
+    },
+    {
+        "id": 29,
+        "employee": "mgorings",
+        "attendance": 4,
+        "shiftCompleted": 20,
+        "sickDays": 34,
+        "averageShiftDuration": 75
+    },
+    {
+        "id": 30,
+        "employee": "ctwidalet",
+        "attendance": 65,
+        "shiftCompleted": 5,
+        "sickDays": 31,
+        "averageShiftDuration": 11
+    },
+    {
+        "id": 31,
+        "employee": "abolusu",
+        "attendance": 4,
+        "shiftCompleted": 22,
+        "sickDays": 94,
+        "averageShiftDuration": 71
+    },
+    {
+        "id": 32,
+        "employee": "cshervilv",
+        "attendance": 53,
+        "shiftCompleted": 56,
+        "sickDays": 34,
+        "averageShiftDuration": 18
+    },
+    {
+        "id": 33,
+        "employee": "tsevierw",
+        "attendance": 87,
+        "shiftCompleted": 93,
+        "sickDays": 10,
+        "averageShiftDuration": 63
+    },
+    {
+        "id": 34,
+        "employee": "egottx",
+        "attendance": 70,
+        "shiftCompleted": 80,
+        "sickDays": 62,
+        "averageShiftDuration": 97
+    },
+    {
+        "id": 35,
+        "employee": "jottery",
+        "attendance": 53,
+        "shiftCompleted": 26,
+        "sickDays": 15,
+        "averageShiftDuration": 11
+    },
+    {
+        "id": 36,
+        "employee": "jlevesquez",
+        "attendance": 62,
+        "shiftCompleted": 24,
+        "sickDays": 77,
+        "averageShiftDuration": 45
+    },
+    {
+        "id": 37,
+        "employee": "dfurzey10",
+        "attendance": 38,
+        "shiftCompleted": 51,
+        "sickDays": 67,
+        "averageShiftDuration": 37
+    },
+    {
+        "id": 38,
+        "employee": "bstapforth11",
+        "attendance": 45,
+        "shiftCompleted": 88,
+        "sickDays": 59,
+        "averageShiftDuration": 59
+    },
+    {
+        "id": 39,
+        "employee": "bshiel12",
+        "attendance": 97,
+        "shiftCompleted": 61,
+        "sickDays": 46,
+        "averageShiftDuration": 94
+    },
+    {
+        "id": 40,
+        "employee": "parstall13",
+        "attendance": 56,
+        "shiftCompleted": 81,
+        "sickDays": 15,
+        "averageShiftDuration": 45
     }
 ]

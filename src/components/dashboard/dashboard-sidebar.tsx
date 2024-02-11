@@ -9,6 +9,7 @@ import LogoutIcon from "../../assets/svgs/dashboard/menu/logout.svg";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { classNames } from "../../utils/functions";
 import { useAuthContext } from "../../context/auth";
+import { useQueryClient } from "react-query";
 
 interface SubmenuItem {
   title: string;
@@ -37,18 +38,18 @@ const menuGroup = [
         title: "schedules",
         path: "/schedules",
       },
-      {
-        title: "shift swaps",
-        path: "/shift-swaps",
-      },
+      // {
+      //   title: "shift swaps",
+      //   path: "/shift-swaps",
+      // },
       {
         title: "time off",
         path: "/time-off",
       },
-      {
-        title: "availability",
-        path: "/availability",
-      },
+      // {
+      //   title: "availability",
+      //   path: "/availability",
+      // },
     ],
   },
   {
@@ -81,6 +82,7 @@ const menuGroup = [
 function DashboardSidebar() {
   const { pathname } = useLocation();
   const navigate = useNavigate();
+  const queryClient = useQueryClient()
 
   const DashboardItem = ({
     title,
@@ -113,6 +115,10 @@ function DashboardSidebar() {
 
               ctx.setData({ ...ctx, isSigned: false, token: undefined })
 
+            }
+
+            if(title === "schedules"){
+              queryClient.invalidateQueries("schedule")
             }
 
             navigateAction(path)

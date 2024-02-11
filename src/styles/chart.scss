@@ -1,0 +1,17 @@
+.bb-axis-x line, .bb-axis-x path 
+{ 
+    visibility: hidden; 
+}
+
+.bb-axis-y line, .bb-axis-y path 
+{ 
+    visibility: hidden; 
+}
+
+.bb-axis-y .tick{
+    fill: #667085
+}
+
+.bb-axis-x .tick{
+    fill: #667085
+}
