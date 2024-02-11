@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react"
+import React, { useMemo, useState } from "react"
 import "../../../styles/schedule.scss"
 import { SchedulesTable } from "../../../components/tables/schedules"
 import Icon from "../../../components/icon"
@@ -42,8 +42,10 @@ function SingleSchedule() {
     // fetch schedule request
 
     const currentWeek = ctx.currentWeek;
-    const currentYear = ctx.currentYear;
     const [currentDate, setCurrentDate] = useState(new Date())
+
+    const currentYear = currentDate.getFullYear();
+
 
 
     const fetchSchedule = async () => {
@@ -175,7 +177,7 @@ function SingleSchedule() {
 
         return daysInWeek;
     };
-    
+
 
     const [columnDate, setColumnDate] = useState(getDaysInWeek())
 
@@ -565,7 +567,7 @@ function SingleSchedule() {
         const dateParts = inputDate.split(' ');
         const monthIndex = months.findIndex(month => month === dateParts[0]);
 
-        const formattedDate = new Date(2024, monthIndex, parseInt(dateParts[1], 10));
+        const formattedDate = new Date(currentDate.getFullYear(), monthIndex, parseInt(dateParts[1], 10));
 
         const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
         const dayName = days[formattedDate.getDay()];
@@ -594,8 +596,8 @@ function SingleSchedule() {
         const [startMonth, startDay] = startStr.split(' ');
         const [endMonth, endDay] = endStr.split(' ');
 
-        const startDate = new Date(`${startMonth} ${startDay}, ${new Date().getFullYear()}`);
-        const endDate = new Date(`${endMonth} ${endDay}, ${new Date().getFullYear()}`);
+        const startDate = new Date(`${startMonth} ${startDay}, ${currentDate.getFullYear()}`);
+        const endDate = new Date(`${endMonth} ${endDay}, ${currentDate.getFullYear()}`);
 
         const startWeek = getWeekNumber(startDate);
         const endWeek = getWeekNumber(endDate);
@@ -606,10 +608,6 @@ function SingleSchedule() {
             return startWeek;
         }
     }
-
-    useEffect(() => {
-        console.log(getDaysInWeek(), dayHeader, dayHeaderId)
-      }, [currentDate])
 
     return (
         <>
@@ -668,18 +666,23 @@ function SingleSchedule() {
                                             setCurrentNumber(currentNumber - 1)
                                         }
                                     } else {
-                                        setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() - 7)))
+                                        setCurrentDate(prevDate => {
+                                            const newDate = new Date(prevDate); // Creating a copy of the previous date
+                                            newDate.setDate(newDate.getDate() - 7); // Updating the date
 
-                                        // setting date range in context
-                                        ctx.setData(prevState => ({ ...prevState, dateRange: formattedDateRange(currentDate) }));
+                                            // Setting date range in context
+                                            ctx.setData(prevState => ({ ...prevState, dateRange: formattedDateRange(newDate) }));
 
-                                        // Setting current week and year in context
+                                            // Setting current week and year in context
+                                            ctx.setData(prevState => ({
+                                                ...prevState,
+                                                currentWeek: getWeekNumberFromDateRange(formattedDateRange(newDate)).toString(),
+                                                currentYear: newDate.getFullYear().toString(),
+                                            }));
 
-                                        ctx.setData(prevState => ({
-                                            ...prevState,
-                                            currentWeek: getWeekNumberFromDateRange(formattedDateRange(currentDate)).toString(),
-                                            currentYear: new Date().getFullYear().toString()
-                                        }));
+                                            return newDate; // Returning the updated date to setCurrentDate
+                                        });
+
                                     }
                                 }}>
                                 <Icon name="leftLight" />
@@ -693,17 +696,23 @@ function SingleSchedule() {
                                             setCurrentNumber(currentNumber + 1)
                                         }
                                     } else {
-                                        setCurrentDate(new Date(currentDate.setDate(currentDate.getDate() + 7)))
+                                        setCurrentDate(prevDate => {
+                                            const newDate = new Date(prevDate); // Creating a copy of the previous date
+                                            newDate.setDate(newDate.getDate() + 7); // Updating the date
 
-                                        // setting date range in context
-                                        ctx.setData(prevState => ({ ...prevState, dateRange: formattedDateRange(currentDate) }));
+                                            // Setting date range in context
+                                            ctx.setData(prevState => ({ ...prevState, dateRange: formattedDateRange(newDate) }));
 
-                                        // Setting current week and year in context
-                                        ctx.setData(prevState => ({
-                                            ...prevState,
-                                            currentWeek: getWeekNumberFromDateRange(formattedDateRange(currentDate)).toString(),
-                                            currentYear: new Date().getFullYear().toString()
-                                        }));
+                                            // Setting current week and year in context
+                                            ctx.setData(prevState => ({
+                                                ...prevState,
+                                                currentWeek: getWeekNumberFromDateRange(formattedDateRange(newDate)).toString(),
+                                                currentYear: newDate.getFullYear().toString(),
+                                            }));
+
+                                            return newDate; // Returning the updated date to setCurrentDate
+                                        });
+
                                     }
                                 }}
                             >

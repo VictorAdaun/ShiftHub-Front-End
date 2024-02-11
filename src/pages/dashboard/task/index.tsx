@@ -3,71 +3,86 @@ import "../../../styles/schedule.scss"
 import Icon from "../../../components/icon"
 import PrimaryButton from "../../../components/button/primary-button"
 import Empty from "../../../assets/illustrations/NewBeginnings.svg"
+import { useQuery, useMutation } from "react-query"
+import axiosInstance from "../../../utils/axios"
+import { AxiosError } from "axios"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import { Link, useNavigate } from "react-router-dom"
-
-
+import MainLoader from "../../../assets/mainLoader.gif"
+import { useQueryClient } from "react-query"
 
 function Task() {
     const navigate = useNavigate();
 
-    // date format logic
-    const months = [
-        'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'
-    ];
-
-    const formattedDateRange = (currentDate) => {
-        const formattedDate = new Date(currentDate);
-        const endDate = new Date(formattedDate);
-        endDate.setDate(endDate.getDate() + 6);
-
-
-        const startMonth = months[formattedDate.getMonth()];
-        const startDay = formattedDate.getDate();
-        const endDay = endDate.getDate();
-        const endMonth = months[endDate.getMonth()]
-
-        return startMonth === endMonth ? `${startMonth} ${startDay} - ${endDay}` : `${startMonth} ${startDay} - ${endMonth} ${endDay}`;
-    }
-
-
-    const formattedDayRange = (date, day) => {
-        const formattedDate = new Date(date);
-        formattedDate.setDate(formattedDate.getDate() + day)
-
-        const startMonth = months[formattedDate.getMonth()];
-        const startDay = formattedDate.getDate();
-
-
-        return `${startMonth} ${startDay}`;
-    }
-
-    const [currentNumber, setCurrentNumber] = useState(0)
-
-    const [currentDate, setCurrentDate] = useState(new Date())
-
-    // end
-
-    const [emptyState, setEmptyState] = useState(false);
-
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false)
-
-    const [dropDown, setDropdown] = useState("Weekly")
-
-    const [selected, setSelected] = useState([])
-
-    const selectedHandler = (e, data) => {
-        if (!selected.includes(data) && e.target.checked) {
-            setSelected([...selected, data])
-        } else if (!e.target.checked) {
-            setSelected(selected.filter((item) => item !== data))
-        }
-    }
-
+    const queryClient = useQueryClient()
 
     const paths = useMemo(() => (location.pathname.split("/")), [])
 
+    const [status, setStatus] = useState("")
+
+    // Fetch tasks
+    const fetchTasks = async () => {
+        const { data } = await axiosInstance.get(status === "" ? "/api/tasks/company" : `/api/tasks/company?status=${status}`)
+        return data.result.data
+    }
+    const tasksQuery = useQuery(["tasks", status],
+        fetchTasks, {
+        enabled: true,
+        onSuccess: (data) => {
+            console.log(data)
+        },
+    })
+
+    // Edit tasks
+    const editTaskRequest = (data) => {
+        return axiosInstance.put(`/task-update/${data}`)
+    }
+
+    const editTaskMutation = useMutation({
+        mutationFn: editTaskRequest,
+        onSuccess: (data) => {
+            console.log(data.data.result.message)
+
+            toast.success(data.data.result.message)
+
+            queryClient.invalidateQueries("tasks")
+        },
+        onError: (err) => {
+            console.log(err)
+
+            if (err instanceof AxiosError) {
+                toast.error(err.response.data?.message || "An error occured")
+            }
+        }
+    })
+
+    // Delete tasks
+    const deleteTaskRequest = (data) => {
+        return axiosInstance.delete(`/api/task/delete/${data}`)
+    }
+
+    const deleteTaskMutation = useMutation({
+        mutationFn: deleteTaskRequest,
+        onSuccess: (data) => {
+            console.log(data.data.result.message)
+
+            toast.success(data.data.result.message)
+
+            queryClient.invalidateQueries("tasks")
+        },
+        onError: (err) => {
+            console.log(err)
+
+            if (err instanceof AxiosError) {
+                toast.error(err.response.data?.message || "An error occured")
+            }
+        }
+    })
+
     return (
         <>
+            <ToastContainer />
             <div className="container w-[90%] mx-auto mt-8 mb-[75px] h-auto">
                 <div className="breadcrumbs flex gap-2 text-grayscale-60 font-normal">
                     <Icon name="calendar" />
@@ -90,106 +105,81 @@ function Task() {
                         <PrimaryButton className="!px-2 !py-4 bg-white !text-grayscale-100 border !border-solid border-grayscale-40">
                             View drafts
                         </PrimaryButton>
-                        <PrimaryButton className="!px-2 !py-4">
+                        <PrimaryButton className="!px-2 !py-4" onClick={() => navigate("/task/create-task")}>
                             Create new task
                         </PrimaryButton>
                     </div>
                 </div>
 
                 <div className="btn-bar flex justify-between mt-8">
-                <div className="flex gap-4">
-                    <PrimaryButton className="px-[16px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 !w-fit flex gap-2">
-                        Filter
-                        <Icon name="filter" />
-                    </PrimaryButton>
-                    <div className="relative z-[0]">
-                        <PrimaryButton className="px-[16px]  !w-[105px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 flex gap-2" onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
-                            {dropDown}
-                            <Icon name="downLight" />
+                    <div className="flex gap-4 items-center">
+                        <PrimaryButton className={`px-[16px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 !w-fit flex gap-2 ${status === "OVERDUE" ? "!border-lydia !text-lydia" : null}`} onClick={() => setStatus("OVERDUE")}>
+                            Overdue
                         </PrimaryButton>
-                        {isDropdownOpen ?
-                            <div className="options bg-white h-auto w-[105px] absolute top-[55px] !border !border-solid !border-grayscale-30 rounded-md text-grayscale-60 text-sm p-[16px] flex flex-col gap-2">
-                                <p className="cursor-pointer hover:text-grayscale-40" onClick={() => {
-                                    setDropdown("Weekly")
-                                    setIsDropdownOpen(false)
-                                }}>Weekly</p>
-                                <p className="cursor-pointer hover:text-grayscale-40" onClick={() => {
-                                    setDropdown("Daily")
-                                    setIsDropdownOpen(false)
-                                }}>Daily</p>
-                            </div> : null}
-                    </div>
-                    <div className="flex !border !border-solid !border-grayscale-30 rounded-md text-grayscale-60 text-sm items-center">
-                        <PrimaryButton className="px-[16px] !bg-white !text-grayscale-60 !w-fit"
-                            onClick={() => {
-                                if (dropDown === "Daily") {
-                                    if (currentNumber > 0) {
-                                        setCurrentNumber(currentNumber - 1)
-                                    }
-                                }
-                            }}>
-                            <Icon name="leftLight" />
+                        <PrimaryButton className={`px-[16px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 !w-fit flex gap-2 ${status === "COMPLETED" ? "!border-lydia !text-lydia" : null}`} onClick={() => setStatus("COMPLETED")}>
+                            Completed
                         </PrimaryButton>
-                        <span>{dropDown === "Weekly" ? formattedDateRange(currentDate) :
-                            <p>{formattedDayRange(currentDate, currentNumber)}</p>}</span>
-                        <PrimaryButton className="px-[16px] !bg-white !text-grayscale-60 !w-fit"
-                            onClick={() => {
-                                if (dropDown === "Daily") {
-                                    if (currentNumber < 6) {
-                                        setCurrentNumber(currentNumber + 1)
-                                    }
-                                }
-                            }}
-                        >
-                            <Icon name="rightLight" />
+                        <PrimaryButton className={`px-[16px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 !w-fit flex gap-2 ${status === "IN_PROGRESS" ? "!border-lydia !text-lydia" : null}`} onClick={() => setStatus("IN_PROGRESS")}>
+                            In-progress
+                        </PrimaryButton>
+                        <PrimaryButton className={`px-[16px] !bg-white !text-grayscale-60 !border !border-solid !border-grayscale-30 !w-fit flex gap-2 ${status === "" ? "!border-lydia !text-lydia" : null}`} onClick={() => setStatus("")}>
+                            All
                         </PrimaryButton>
                     </div>
-                </div>
-                <div className="flex !border !border-solid !border-grayscale-30 rounded-md items-center gap-2 pl-4 w-1/3">
-                    <Icon name="search" />
-                    <input type="text" placeholder="Search" className="outline-none h-full text-grayscale-60" />
-                </div>
-            </div>
 
-                {emptyState ? <section className="w-full h-[500px] my-8 border border-solid border-grayscale-30 rounded-md flex flex-col items-center justify-center gap-2">
-                    <img src={Empty} alt="no schedule" />
-                    <h2>No tasks have been created</h2>
-                    <p className="text-grayscale-60 text-sm">Create and publish your tasks</p>
-                    <PrimaryButton className="!px-4 !py-4 !w-fit mt-2">
-                        Get Started
-                    </PrimaryButton>
-                </section> :
-                    <section className="swaps">
-                        {[1, 2, 3].map((swap, id) => {
-                            return (
-                                <div className="swap w-full my-4 p-4 border border-solid border-grayscale-30 rounded-md flex justify-between">
-                                    <div className="flex items-center gap-4">
-                                        <input type="checkbox" onChange={(e) => selectedHandler(e, id)} className="cursor-pointer h-[24px] w-[24px] accent-lydia" />
-                                        <div className="bg-[#E5E1FC66] h-[48px] w-[48px] rounded-full flex items-center justify-center">
-                                            <p className="text-lydia">T</p>
+                    <div className="flex items-center">
+                        <div className="flex items-center gap-2">
+                            <Icon name="search" />
+                            <input type="text" placeholder="Search" className="w-24 outline-none h-full text-grayscale-60 placeholder:text-grayscale-60 text-sm" />
+                        </div>
+                        <PrimaryButton className="px-[16px] !bg-white !text-grayscale-60 !w-fit flex gap-2 items-center">
+                            <Icon name="sort" />
+                            Sort
+                        </PrimaryButton>
+                        <PrimaryButton className="px-[16px] !bg-white !text-grayscale-60 !w-fit flex gap-2 items-center">
+                            <Icon name="filter" />
+                            Filter
+                        </PrimaryButton>
+                    </div>
+                </div>
+
+                {tasksQuery.isLoading ? <section className="w-full h-[500px] my-8 border border-solid border-grayscale-30 rounded-md flex flex-col items-center justify-center gap-2">
+                    <img src={MainLoader} alt="main loader" />
+                </section>
+                    : tasksQuery.data?.data.length < 1 ?
+                        <section className="w-full h-[500px] my-8 border border-solid border-grayscale-30 rounded-md flex flex-col items-center justify-center gap-2">
+                            <img src={Empty} alt="no schedule" />
+                            <h2>No tasks have been created</h2>
+                            <p className="text-grayscale-60 text-sm">Create and publish your tasks</p>
+                            <PrimaryButton className="!px-4 !py-4 !w-fit mt-2">
+                                Get Started
+                            </PrimaryButton>
+                        </section> :
+                        <section className="tasks">
+                            {tasksQuery.data?.data.map((task, id) => {
+
+                                const dueDate = new Date(task.endDate).toString().substring(0, 15)
+
+                                return (
+                                    <div key={id} className="swap w-full my-4 p-4 border border-solid border-grayscale-30 rounded-md flex justify-between">
+                                        <div className="flex items-center gap-4">
+                                            <div>
+                                                <p className="text-grayscale-100">{task.title}</p>
+                                                {task.status === "COMPLETED" ? <p className="text-grayscale-60 text-sm">Completed on {dueDate}</p> : task.status === "OVERDUE" ? <p className="text-grayscale-60 text-sm">Overdue on {dueDate}</p> :
+                                                <em className="text-sm text-grayscale-60 not-italic">Due by {dueDate}</em>}
+                                            </div>
                                         </div>
-                                        <div>
-                                            <p className="text-grayscale-60 text-sm"><span className="text-grayscale-100">Theresa A.</span> is requesting a <span className="text-grayscale-100">Time Off</span></p>
-                                            <em className="text-sm text-grayscale-60 not-italic">2 hours ago</em>
+                                        <div className="flex items-center gap-4 text-sm">
+                                            <div className="cursor-pointer">
+                                                <Icon name="tickSm" />
+                                            </div>
+                                            <p className="cursor-pointer text-[#E62E2E]" onClick={()=> deleteTaskMutation.mutate(task.id)}>Delete</p>
+                                            <Link to={`/task/view?id=${task.id}`} className="text-lydia">View</Link>
                                         </div>
                                     </div>
-                                    <div className="flex items-center gap-4">
-                                        <Icon name="closeGrey" />
-                                        <Icon name="tick" />
-                                        <Link to="/task/view" className="text-lydia">View</Link>
-                                    </div>
-                                </div>
-                            );
-                        })}
-                        {selected.length > 0 ?
-                            <div className="selected-notification w-[74%] fixed bottom-[10px] bg-grayscale-100 px-4 py-2 rounded-md flex justify-between items-center">
-                                <p className="text-sm text-white">{selected.length} {selected.length > 1 ? "tasks" : "task"} selected</p>
-                                <div className="flex gap-2">
-                                    <button className="flex gap-2 p-2 bg-grayscale-100 rounded-md text-white items-center"><Icon name="closeWhiteSm" /> Decline Time Off</button>
-                                    <button className="flex gap-2 p-2 bg-white rounded-md text-grayscale-100 items-center"><Icon name="tickSm" />Approve Time Off</button>
-                                </div>
-                            </div> : null}
-                    </section>}
+                                );
+                            })}
+                        </section>}
             </div>
         </>
     );

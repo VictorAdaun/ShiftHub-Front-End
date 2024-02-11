@@ -23,7 +23,7 @@ function Modal(props: modalProps) {
 
   return (
     <div className="">
-        <div onClick={props.handleClose} className="bg-[#101323] bg-opacity-50 backdrop-blur-5 h-screen w-full fixed left-0 bottom-0 z-[9]">
+        <div onClick={props.handleClose} className="bg-[#101323] bg-opacity-50 backdrop-blur-5 h-screen w-full fixed left-0 bottom-0 z-[10]">
         </div>
 
         <div className="modal w-auto py-4 fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-[10] rounded-lg flex justify-center items-center">

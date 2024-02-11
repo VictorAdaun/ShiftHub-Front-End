@@ -13,6 +13,26 @@ body{
 }
 
 body{
-  font-family:
-   "Helvetica Neue",sans-serif;                                       
+  font-family: 'Noto Sans', sans-serif;                                    
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #E5E1FC;
+  border-radius: 2px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
